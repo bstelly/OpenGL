@@ -47,12 +47,8 @@ int Start()
 	return 1;
 }
 
-
-
 int main()
 {
-	Start();
-	Update();
-	glfwTerminate();
-	return 0;
+	Application* app = new IntroductionApp;
+
 }

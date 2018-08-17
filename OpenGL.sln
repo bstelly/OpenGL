@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.Setup", "Open_GL\Open_GL.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticeSetup", "PracticeSetup\PracticeSetup.vcxproj", "{CBD6DF65-464E-4923-8BDF-980FE5E68EF9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticeWindow", "PracticeWindow\PracticeWindow.vcxproj", "{2073C143-BE0E-413D-A870-D115F12E9919}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{CBD6DF65-464E-4923-8BDF-980FE5E68EF9}.Release|x64.Build.0 = Release|x64
 		{CBD6DF65-464E-4923-8BDF-980FE5E68EF9}.Release|x86.ActiveCfg = Release|Win32
 		{CBD6DF65-464E-4923-8BDF-980FE5E68EF9}.Release|x86.Build.0 = Release|Win32
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Debug|x64.ActiveCfg = Debug|x64
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Debug|x64.Build.0 = Debug|x64
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Debug|x86.ActiveCfg = Debug|Win32
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Debug|x86.Build.0 = Debug|Win32
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Release|x64.ActiveCfg = Release|x64
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Release|x64.Build.0 = Release|x64
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Release|x86.ActiveCfg = Release|Win32
+		{2073C143-BE0E-413D-A870-D115F12E9919}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
