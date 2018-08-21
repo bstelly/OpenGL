@@ -1,6 +1,6 @@
 #define GLM_FORCE_SWIZZLE
-#include "Gizmos.h"
 #include "gl_core_4_4.h"
+#include "Gizmos.h"
 #include <stdio.h>
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>

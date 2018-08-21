@@ -1,7 +1,7 @@
-#include "Application.h"
 #include "gl_core_4_4.h"
-#include "Gizmos.h"
 #include <glfw3.h>
+#include "Application.h"
+#include "Gizmos.h"
 
 
 Application::Application() :
@@ -10,6 +10,12 @@ Application::Application() :
 	m_clearColor{1, 1, 1, 1},
 	m_runningTime(0)
 {}
+
+Application::~Application()
+{
+
+}
+
 
 void Application::run(const char * title, unsigned int width, unsigned int height, bool fullscreen)
 {
@@ -23,6 +29,7 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
+		startup();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		update(0);
 		draw();

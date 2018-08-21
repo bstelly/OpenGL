@@ -1,9 +1,6 @@
 #pragma once
-#include <glfw3.h>
 
-//IntroApp : Application(
-//void startup() { printf("welcome to jurassic application"); }
-//}
+struct GLFWwindow;
 
 class Application
 {
