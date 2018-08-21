@@ -7,6 +7,7 @@
 
 void IntroductionApp::startup()
 {
+	Gizmos::create();
 }
 
 void IntroductionApp::update(float dt)

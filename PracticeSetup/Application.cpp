@@ -1,7 +1,6 @@
 #include "gl_core_4_4.h"
 #include <glfw3.h>
 #include "Application.h"
-#include "Gizmos.h"
 
 
 Application::Application() :
@@ -23,13 +22,13 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 	m_window = glfwCreateWindow(1280, 720, "Hello World", NULL, NULL);
 	glfwMakeContextCurrent(m_window);
 	ogl_LoadFunctions();
-	Gizmos::create();
+
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
 	glEnable(GL_DEPTH_TEST);
+	startup();
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		startup();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		update(0);
 		draw();
