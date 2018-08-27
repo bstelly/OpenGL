@@ -1,5 +1,5 @@
 #include "Transform.h"
-#include <winuser.h>
+//#include <winuser.h>
 
 Transform::Transform()
 {
@@ -42,7 +42,7 @@ glm::mat4 Transform::Rotation(float radius, glm::vec3 axis)
 	glm::vec3 z_axis = glm::vec3{ 0, 0, 1 };
 
 	//Create rotation matrix with columns
-	glm::mat4 rotationMatrix = glm::mat4(x_axis, y_axis, z_axis);
+	glm::mat4 rotationMatrix = glm::mat3(x_axis, y_axis, z_axis);
 
 	//Plug values into the rotation matrix
 	if(axis == x_axis)

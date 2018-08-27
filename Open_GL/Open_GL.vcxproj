@@ -87,6 +87,10 @@
     <IncludePath>$(SolutionDir)Dependencies\glfw;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDIr)Dependencies\glfw\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\glfw;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,6 +108,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>glfw3.h;opengl32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
