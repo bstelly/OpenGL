@@ -10,12 +10,13 @@ public:
 	~Transform();
 
 	glm::mat4 Translate(glm::vec3 move);
-	glm::mat4 Rotation(float radius, glm::vec3 axis);
+	glm::mat4 Rotate(float radius, glm::vec3 axis);
 	glm::mat4 Scale(float scale);
 
-private:
 
 	glm::mat4 m_model; //Identity
+private:
+
 	
 	glm::vec3 m_worldPosition; //m_model[3]
 	glm::vec3 m_localPosition;

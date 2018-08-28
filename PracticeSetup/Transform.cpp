@@ -31,7 +31,7 @@ glm::mat4 Transform::Translate(glm::vec3 move)
 	return m_model;
 }
 
-glm::mat4 Transform::Rotation(float radius, glm::vec3 axis)
+glm::mat4 Transform::Rotate(float radius, glm::vec3 axis)
 {
 	float cosine = cos(radius);
 	float sine = sin(radius);
@@ -71,45 +71,6 @@ glm::mat4 Transform::Rotation(float radius, glm::vec3 axis)
 
 	return m_model;
 
-
-
-
-
-
-
-
-
-	//if (axis[0] == 0 && axis[1] == 0 && axis[2] == 1)
-	//{
-	//	m_model = m_model * glm::mat4{
-	//		cos(radius), -sin(radius), 0, 0,	//rotate on Z
-	//		sin(radius), cos(radius), 0, 0,
-	//		0, 0, 1, 0,
-	//		0, 0, 0, 0};
-	//	return m_model;
-	//}
-
-	//if (axis[0] == 1 && axis[1] == 0 && axis[2] == 0)
-	//{
-	//	m_model = m_model * glm::mat4{
-	//		1, 0, 0, 0,
-	//		0, cos(radius), -sin(radius), 0,	//rotate on x
-	//		0, sin(radius), cos(radius), 0,
-	//		0, 0, 0, 0
-	//	};
-	//	return m_model;
-	//}
-
-	//if (axis[0] == 0 && axis[1] == 1 && axis[2] == 0)
-	//{
-	//	m_model = m_model * glm::mat4{
-	//		cos(radius), 0, sin(radius), 0,		//rotate on y
-	//		0, 1, 0, 0,
-	//		-sin(radius), 0, cos(radius), 0,
-	//		0, 0, 0, 0
-	//	};
-	//	return m_model;
-	//}
 }
 
 glm::mat4 Transform::Scale(float scale)

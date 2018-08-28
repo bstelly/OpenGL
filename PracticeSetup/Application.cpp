@@ -23,14 +23,20 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 	glfwMakeContextCurrent(m_window);
 	ogl_LoadFunctions();
 
+	float previousTime = glfwGetTime();
+
+
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
 	glEnable(GL_DEPTH_TEST);
 	startup();
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
+		float currentTime = glfwGetTime();
+		float dt = currentTime - previousTime;
+		previousTime = currentTime;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		update(0);
+		update(dt);
 		draw();
 
 		glfwSwapBuffers(m_window);
