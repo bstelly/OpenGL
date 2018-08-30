@@ -1,5 +1,5 @@
-#include "IntroductionApp.h"
 #include "gl_core_4_4.h"
+#include "IntroductionApp.h"
 #include <glfw3.h>
 #include "Gizmos.h"
 #include "Transform.h"

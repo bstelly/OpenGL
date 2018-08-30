@@ -1,7 +1,7 @@
 #pragma once
-#include "Application.h"
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
+#include "Application.h"
 
 class IntroductionApp : public Application
 {

@@ -1,5 +1,6 @@
 #pragma once
-#include <glm/ext.hpp>
+#include <glfw3.h>
+#include <glm\ext.hpp>
 
 class Camera
 {
@@ -9,12 +10,12 @@ protected:
 	glm::mat4 projectionTransform;
 	glm::mat4 projectionViewTransform;
 
-	virtual void UpdateProjectionViewTransform();
+	void UpdateProjectionViewTransform();
 
 public:
 	Camera();
 	~Camera();
-	virtual void Update(float deltaTime) = 0;
+	virtual void Update(GLFWwindow * window, float deltaTime) = 0;
 	void SetPerspective(float fieldOfView, float aspectRatio, float near, float far);
 	void SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up);
 	void SetPosition(glm::vec3 position);

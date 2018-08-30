@@ -1,8 +1,10 @@
+#include <glm\glm.hpp>
+#include <glm\ext.hpp>
 #include "Camera.h"
 
 Camera::Camera()
 {
-
+	
 }
 
 Camera::~Camera()
@@ -15,7 +17,7 @@ void Camera::UpdateProjectionViewTransform()
 
 }
 
-void Camera::Update(float deltaTime)
+void Camera::Update(GLFWwindow * window, float deltaTime)
 {
 
 }
@@ -33,4 +35,24 @@ void SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 void SetPosition(glm::vec3 position)
 {
 
+}
+
+glm::mat4 Camera::GetWorldTransform()
+{
+	return worldTransform;
+}
+
+glm::mat4 Camera::GetView()
+{
+	return viewTransform;
+}
+
+glm::mat4 Camera::GetProjection()
+{
+	return projectionTransform;
+}
+
+glm::mat4 Camera::GetProjectionView()
+{
+	return projectionViewTransform;
 }

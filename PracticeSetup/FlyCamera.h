@@ -1,6 +1,8 @@
 #pragma once
-#include "Camera.h"
 #include <glm\ext.hpp>
+#include "Camera.h"
+
+
 
 
 class FlyCamera : Camera
@@ -12,6 +14,6 @@ private:
 public:
 	FlyCamera();
 	~FlyCamera();
-	void Update(float deltaTime);
+	void Update(GLFWwindow* window, float deltaTime);
 	void SetSpeed(float speed);
 };
