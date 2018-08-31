@@ -14,25 +14,40 @@ FlyCamera::~FlyCamera()
 
 void FlyCamera::Update(GLFWwindow* window, float deltaTime)
 {
-	Transform transform = Transform();
-	transform.m_model = worldTransform;
-
 	if (glfwGetKey(window, GLFW_KEY_W))
 	{
-		worldTransform += transform.Translate(glm::vec3(0, 1, 0) * deltaTime);
+		SetPosition(glm::vec3(0, -m_speed * deltaTime, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_A))
 	{
-		worldTransform += transform.Translate(glm::vec3(-1, 0, 0) * deltaTime);
+		SetPosition(glm::vec3(m_speed*deltaTime, 0, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_S))
 	{
-		worldTransform += transform.Translate(glm::vec3(0, -1, 0) * deltaTime);
+		SetPosition(glm::vec3(0, m_speed * deltaTime, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_D))
 	{
-		worldTransform += transform.Translate(glm::vec3(1, 0, 0) * deltaTime);
+		SetPosition(glm::vec3(-m_speed * deltaTime, 0, 0));
 	}
+
+	//if (glfwGetKey(window, GLFW_KEY_W))
+	//{
+	//	Camera.
+	//	worldTransform += transform.Translate(glm::vec3(0, 1, 0) * deltaTime);
+	//}
+	//if (glfwGetKey(window, GLFW_KEY_A))
+	//{
+	//	worldTransform += transform.Translate(glm::vec3(-1, 0, 0) * deltaTime);
+	//}
+	//if (glfwGetKey(window, GLFW_KEY_S))
+	//{
+	//	worldTransform += transform.Translate(glm::vec3(0, -1, 0) * deltaTime);
+	//}
+	//if (glfwGetKey(window, GLFW_KEY_D))
+	//{
+	//	worldTransform += transform.Translate(glm::vec3(1, 0, 0) * deltaTime);
+	//}
 
 }
 

@@ -5,7 +5,7 @@
 
 
 
-class FlyCamera : Camera
+class FlyCamera : public Camera
 {
 private:
 	float m_speed;

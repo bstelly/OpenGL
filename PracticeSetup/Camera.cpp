@@ -2,9 +2,10 @@
 #include <glm\ext.hpp>
 #include "Camera.h"
 
+
 Camera::Camera()
 {
-	
+	worldTransform = glm::mat4{ 1 };
 }
 
 Camera::~Camera()
@@ -14,27 +15,27 @@ Camera::~Camera()
 
 void Camera::UpdateProjectionViewTransform()
 {
-
-}
-
-void Camera::Update(GLFWwindow * window, float deltaTime)
-{
-
+	viewTransform = glm::inverse(worldTransform);
+	projectionTransform = viewTransform * projectionTransform;
 }
 
 void Camera::SetPerspective(float fieldOfView, float aspectRatio, float near, float far)
 {
-
+	projectionTransform = glm::perspective(glm::pi<float>() * fieldOfView,
+		aspectRatio, near, far);
 }
 
-void SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
+void Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 {
-
+	viewTransform = glm::lookAt(from, to, up);
 }
 
-void SetPosition(glm::vec3 position)
+void Camera::SetPosition(glm::vec3 position)
 {
-
+	//worldTransform[3].xyz = position
+	worldTransform[3].x += position.x;
+	worldTransform[3].y += position.y;
+	worldTransform[3].z += position.z;
 }
 
 glm::mat4 Camera::GetWorldTransform()

@@ -1,6 +1,7 @@
 #pragma once
 #include <glfw3.h>
 #include <glm\ext.hpp>
+#define GLM_FORCE_SWIZZLE
 
 class Camera
 {

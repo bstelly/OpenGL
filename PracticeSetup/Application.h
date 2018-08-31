@@ -19,5 +19,5 @@ protected:
 	bool m_gameover;
 	float m_clearColor[4];
 	float m_runningTime;
-	FlyCamera myCamera;
+	FlyCamera* myCamera = new FlyCamera;
 };
