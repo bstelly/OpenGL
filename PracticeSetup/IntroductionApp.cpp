@@ -18,6 +18,7 @@ void IntroductionApp::update(float dt)
 	Transform transform = Transform();
 	transform.m_model = model;
 	model = transform.Rotate(dt, glm::vec3(0, 1, 0));
+	camera.Update(m_window, dt);
 }
 
 IntroductionApp::IntroductionApp()

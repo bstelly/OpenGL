@@ -1,5 +1,4 @@
 #pragma once
-#include "FlyCamera.h"
 
 struct GLFWwindow;
 
@@ -19,5 +18,8 @@ protected:
 	bool m_gameover;
 	float m_clearColor[4];
 	float m_runningTime;
+
 	FlyCamera* myCamera = new FlyCamera;
+
+
 };

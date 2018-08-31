@@ -36,6 +36,7 @@ void Camera::SetPosition(glm::vec3 position)
 	worldTransform[3].x += position.x;
 	worldTransform[3].y += position.y;
 	worldTransform[3].z += position.z;
+
 }
 
 glm::mat4 Camera::GetWorldTransform()

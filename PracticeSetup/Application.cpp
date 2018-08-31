@@ -35,8 +35,11 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 		float dt = currentTime - previousTime;
 		previousTime = currentTime;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		update(dt);
+
+
 		myCamera->Update(m_window, dt);
+
+
 		draw();
 
 		glfwSwapBuffers(m_window);
