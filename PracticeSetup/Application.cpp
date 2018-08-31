@@ -25,8 +25,7 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 
 	float previousTime = glfwGetTime();
 
-
-	glClearColor(0.25f, 0.25f, 0.25f, 1);
+	glClearColor(0.05f, 0.05f, 0.05f, 1);
 	glEnable(GL_DEPTH_TEST);
 	startup();
 
@@ -36,7 +35,11 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 		float dt = currentTime - previousTime;
 		previousTime = currentTime;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		update(dt);
+
+
+		myCamera->Update(m_window, dt);
+
+
 		draw();
 
 		glfwSwapBuffers(m_window);
