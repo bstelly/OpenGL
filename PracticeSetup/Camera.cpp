@@ -27,14 +27,13 @@ void Camera::SetPerspective(float fieldOfView, float aspectRatio, float near, fl
 
 }
 
-void SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
+void Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 {
 
 }
 
-void SetPosition(glm::vec3 position)
+void Camera::SetPosition(glm::vec3 position)
 {
-
 }
 
 glm::mat4 Camera::GetWorldTransform()
