@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,31 +18,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="FlyCamera.h" />
-    <ClInclude Include="Gizmos.h" />
-    <ClInclude Include="gl_core_4_4.h" />
-    <ClInclude Include="IntroductionApp.h" />
-    <ClInclude Include="Transform.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="FlyCamera.cpp" />
-    <ClCompile Include="Gizmos.cpp" />
-    <ClCompile Include="gl_core_4_4.c" />
-    <ClCompile Include="IntroductionApp.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Transform.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{CBD6DF65-464E-4923-8BDF-980FE5E68EF9}</ProjectGuid>
-    <RootNamespace>PracticeSetup</RootNamespace>
+    <ProjectGuid>{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}</ProjectGuid>
+    <RootNamespace>RenderingGeometryApplication</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>IntroductionApplication</ProjectName>
+    <ProjectName>RenderingGeometryApp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -52,7 +33,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -90,16 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\glfw;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\glfw\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\glfw;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\Lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\glfw;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\glfw;$(SolutionDir)Dependencies\application;$(SolutionDir)Dependencies\glm;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\lib;$(SolutionDir)Dependencies\application;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,7 +82,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;Application.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,9 +92,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>opengl32;glfw3.h;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -135,7 +105,6 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,6 +121,15 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="gl_core_4_4.h" />
+    <ClInclude Include="RenderingGeometryApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gl_core_4_4.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="RenderingGeometryApp.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

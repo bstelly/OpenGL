@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticeWindow", "PracticeW
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bootstrap", "Bootstrap\Bootstrap.vcxproj", "{533D72BB-9C27-4756-94EB-6BE8C1072AFA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderingGeometryApp", "RenderingGeometryApplication\RenderingGeometryApplication.vcxproj", "{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{533D72BB-9C27-4756-94EB-6BE8C1072AFA}.Release|x64.Build.0 = Release|x64
 		{533D72BB-9C27-4756-94EB-6BE8C1072AFA}.Release|x86.ActiveCfg = Release|Win32
 		{533D72BB-9C27-4756-94EB-6BE8C1072AFA}.Release|x86.Build.0 = Release|Win32
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Debug|x64.ActiveCfg = Debug|x64
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Debug|x64.Build.0 = Debug|x64
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Debug|x86.ActiveCfg = Debug|Win32
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Debug|x86.Build.0 = Debug|Win32
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Release|x64.ActiveCfg = Release|x64
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Release|x64.Build.0 = Release|x64
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Release|x86.ActiveCfg = Release|Win32
+		{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
