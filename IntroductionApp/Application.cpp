@@ -20,7 +20,7 @@ Application::~Application()
 void Application::run(const char * title, unsigned int width, unsigned int height, bool fullscreen)
 {
 	glfwInit();
-	m_window = glfwCreateWindow(1280, 720, "Hello World", NULL, NULL);
+	m_window = glfwCreateWindow(width, height, title, NULL, NULL);
 	glfwMakeContextCurrent(m_window);
 	ogl_LoadFunctions();
 
