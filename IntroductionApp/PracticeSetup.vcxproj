@@ -19,13 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\IntroductionApp\Application.h" />
-    <ClInclude Include="..\IntroductionApp\Camera.h" />
-    <ClInclude Include="..\IntroductionApp\FlyCamera.h" />
-    <ClInclude Include="..\IntroductionApp\Gizmos.h" />
-    <ClInclude Include="..\IntroductionApp\gl_core_4_4.h" />
-    <ClInclude Include="..\IntroductionApp\IntroductionApp.h" />
-    <ClInclude Include="..\IntroductionApp\Transform.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FlyCamera.h" />
@@ -35,14 +28,6 @@
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\IntroductionApp\Application.cpp" />
-    <ClCompile Include="..\IntroductionApp\Camera.cpp" />
-    <ClCompile Include="..\IntroductionApp\FlyCamera.cpp" />
-    <ClCompile Include="..\IntroductionApp\Gizmos.cpp" />
-    <ClCompile Include="..\IntroductionApp\gl_core_4_4.c" />
-    <ClCompile Include="..\IntroductionApp\IntroductionApp.cpp" />
-    <ClCompile Include="..\IntroductionApp\main.cpp" />
-    <ClCompile Include="..\IntroductionApp\Transform.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FlyCamera.cpp" />
@@ -51,11 +36,6 @@
     <ClCompile Include="IntroductionApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\IntroductionApp\PracticeSetup.vcxproj" />
-    <None Include="..\IntroductionApp\PracticeSetup.vcxproj.filters" />
-    <None Include="..\IntroductionApp\PracticeSetup.vcxproj.user" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
