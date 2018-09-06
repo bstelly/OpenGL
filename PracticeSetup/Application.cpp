@@ -1,6 +1,7 @@
 #include "gl_core_4_4.h"
 #include <glfw3.h>
 #include "Application.h"
+#include "Transform.h"
 
 
 Application::Application() :
@@ -24,7 +25,7 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 	ogl_LoadFunctions();
 
 	float previousTime = glfwGetTime();
-
+	
 	glClearColor(0.05f, 0.05f, 0.05f, 1);
 	glEnable(GL_DEPTH_TEST);
 	startup();
