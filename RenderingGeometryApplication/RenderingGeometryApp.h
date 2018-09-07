@@ -1,29 +1,17 @@
 #pragma once
 #include <glm/ext.hpp>
-#include <vector>
 #include <Application.h>
+#include "MeshRenderer.h"
 
 
 
 class RenderingGeometryApp : public Application
 {
 public:
-
-	struct Vertex
-	{
-		glm::vec4 position;
-		glm::vec4 color;
-	};
-	
 	RenderingGeometryApp();
 	~RenderingGeometryApp();
 	
-	std::vector<unsigned int> m_indices;
-	std::vector<Vertex> m_vertices;
-
-	unsigned int m_ibo;
-	unsigned int m_vbo;
-	unsigned int m_vao;
+	MeshRenderer* _plane;
 	unsigned int m_program;
 
 	glm::mat4 m_model;

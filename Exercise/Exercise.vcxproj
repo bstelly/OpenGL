@@ -20,10 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F2A7959F-0AC9-4FD1-ABD4-34F42632CADA}</ProjectGuid>
-    <RootNamespace>RenderingGeometryApplication</RootNamespace>
+    <ProjectGuid>{7E60061E-3CA2-495B-A872-0F1A549F9E0A}</ProjectGuid>
+    <RootNamespace>Exercise</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>RenderingGeometryApp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,10 +69,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\glfw;$(SolutionDir)Dependencies\application;$(SolutionDir)Dependencies\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\lib;$(SolutionDir)Dependencies\application\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -81,9 +77,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;IntroductionApplication.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -122,15 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gl_core_4_4.h" />
-    <ClInclude Include="MeshRenderer.h" />
-    <ClInclude Include="RenderingGeometryApp.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="gl_core_4_4.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MeshRenderer.cpp" />
-    <ClCompile Include="RenderingGeometryApp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

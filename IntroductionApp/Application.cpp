@@ -13,7 +13,6 @@ Application::Application() :
 
 Application::~Application()
 {
-
 }
 
 
