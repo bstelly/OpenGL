@@ -2,6 +2,7 @@
 #include <glm/ext.hpp>
 #include <Application.h>
 #include "MeshRenderer.h"
+#include "Shader.h"
 
 
 
@@ -11,8 +12,8 @@ public:
 	RenderingGeometryApp();
 	~RenderingGeometryApp();
 	
-	MeshRenderer* _plane;
-	unsigned int m_program;
+	MeshRenderer* mesh;
+	Shader* shader;
 
 	glm::mat4 m_model;
 	glm::mat4 m_view;

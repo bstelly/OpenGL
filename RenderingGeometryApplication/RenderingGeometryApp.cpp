@@ -1,6 +1,7 @@
 #define GLM_FORCE_SWIZZLE
 #include "gl_core_4_4.h"
 #include "RenderingGeometryApp.h"
+#include "Shader.h"
 
 
 
@@ -22,44 +23,25 @@ void RenderingGeometryApp::startup()
 	MeshRenderer::Vertex D = { glm::vec4(-10, -10, 0, 1), glm::vec4(0, 0, 0, 1) };
 	std::vector<MeshRenderer::Vertex> vertices = { A, B, C, D };
 
-	_plane = new MeshRenderer();
-	_plane->initialize(indices, vertices);
+	mesh = new MeshRenderer();
+	mesh->initialize(indices, vertices);
 
-
-	//Shader Setup
-	const char*	vsSource = "#version 410\n \
+	shader->Initialize("#version 410\n \
                             layout(location = 0) in vec4 Position; \
                             layout(location = 1) in vec4 Color; \
                             out vec4 vColor; \
                             uniform mat4 ProjectionViewWorld; \
                             void main() { vColor = Color; \
-                            gl_Position = ProjectionViewWorld * Position; }";
+                            gl_Position = ProjectionViewWorld * Position; }",
 
-	const char *fsSource = "#version 410\n \
-                            in vec4 vColor; \
-                            out vec4 FragColor; \
-                            void main() { FragColor = vColor; }";
+		"#version 410\n \
+                            layout(location = 0) in vec4 Position; \
+                            layout(location = 1) in vec4 Color; \
+                            out vec4 vColor; \
+                            uniform mat4 ProjectionViewWorld; \
+                            void main() { vColor = Color; \
+                            gl_Position = ProjectionViewWorld * Position; }");
 
-	//make a handle for the vertex shader
-	//this handle is used to be linked to the shader program
-	//WE ARE DEFINING THE SHADER PIPELINE
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	//specify the code that we are going to compile
-	glShaderSource(vertexShader, 1, (const char**)&vsSource, 0);
-	glCompileShader(vertexShader);
-
-	glShaderSource(fragmentShader, 1, (const char**)&fsSource, 0);
-	glCompileShader(fragmentShader);
-
-	//make a handle for the program
-	m_program = glCreateProgram();
-
-	//link the shader programs to that program
-	glAttachShader(m_program, vertexShader);
-	glAttachShader(m_program, fragmentShader);
-	glLinkProgram(m_program);
 }
 
 void RenderingGeometryApp::update(float dt)
@@ -72,10 +54,10 @@ void RenderingGeometryApp::update(float dt)
 
 void RenderingGeometryApp::draw()
 {
-	glUseProgram(m_program);
+	glUseProgram(shader->m_program);
 
 	//get an id that is the variable from the shader
-	int variableId = glGetUniformLocation(m_program, "ProjectionViewWorld");
+	int variableId = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
 
 	//create a variable to send
 	glm::mat4 mvp = m_projection * m_view * m_model;
@@ -83,7 +65,7 @@ void RenderingGeometryApp::draw()
 	//send the variable
 	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
 
-	_plane->render();
+	mesh->render();
 
 	glUseProgram(0);
 }
