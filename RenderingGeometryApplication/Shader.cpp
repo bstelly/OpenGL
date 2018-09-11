@@ -1,5 +1,16 @@
-#include "gl_core_4_4.h"
+#include <gl_core_4_4.h>
 #include "Shader.h"
+
+Shader::Shader()
+{
+	
+}
+
+Shader::~Shader()
+{
+	
+}
+
 
 
 void Shader::Initialize(const char* vertexShaderSource, const char* fragmentShaderSource)
