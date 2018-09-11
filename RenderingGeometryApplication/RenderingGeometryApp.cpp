@@ -26,7 +26,8 @@ void RenderingGeometryApp::startup()
 	mesh = new MeshRenderer();
 	mesh->initialize(indices, vertices);
 
-	shader->Initialize("#version 410\n \
+	shader = new Shader();
+	shader->Initialize(		"#version 410\n \
                             layout(location = 0) in vec4 Position; \
                             layout(location = 1) in vec4 Color; \
                             out vec4 vColor; \
@@ -34,7 +35,7 @@ void RenderingGeometryApp::startup()
                             void main() { vColor = Color; \
                             gl_Position = ProjectionViewWorld * Position; }",
 
-		"#version 410\n \
+							"#version 410\n \
                             layout(location = 0) in vec4 Position; \
                             layout(location = 1) in vec4 Color; \
                             out vec4 vColor; \
