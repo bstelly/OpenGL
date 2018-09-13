@@ -15,4 +15,5 @@ public:
 	unsigned int m_program;
 
 	void Initialize(const char* vertexShaderSource, const char* fragmentShaderSource);
+
 };

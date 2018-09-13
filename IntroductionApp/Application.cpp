@@ -2,6 +2,8 @@
 #include <glfw3.h>
 #include "Application.h"
 #include "Transform.h"
+#include "imgui.h"
+#include "imgui_impl_glfw_gl3.h"
 
 
 Application::Application() :
@@ -27,6 +29,9 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 	
 	glClearColor(0.05f, 0.05f, 0.05f, 1);
 	glEnable(GL_DEPTH_TEST);
+
+	ImGui_ImplGlfwGL3_Init(m_window, true);
+
 	startup();
 
 	while (!glfwWindowShouldClose(m_window) && glfwGetKey(m_window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -39,8 +44,10 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 		update(dt);
 		myCamera->Update(m_window, dt);
 
+		ImGui_ImplGlfwGL3_NewFrame();
 
 		draw();
+		ImGui::Render();
 
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
