@@ -18,7 +18,6 @@ public:
 	glm::mat4 m_view;
 	glm::mat4 m_projection;
 
-	unsigned int m_program;
 
 	void startup();
 	void update(float dt);
