@@ -27,7 +27,6 @@ void GUIApplication::draw()
 {	
 	if(ImGui::Button("A Button", ImVec2(300, 100)))
 	{
-		int a = 0;
 	}
 }
 
