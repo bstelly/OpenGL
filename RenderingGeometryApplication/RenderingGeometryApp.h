@@ -5,7 +5,6 @@
 #include "Shader.h"
 
 
-
 class RenderingGeometryApp : public Application
 {
 public:
@@ -18,6 +17,8 @@ public:
 	glm::mat4 m_model;
 	glm::mat4 m_view;
 	glm::mat4 m_projection;
+
+	unsigned int m_program;
 
 	void startup();
 	void update(float dt);

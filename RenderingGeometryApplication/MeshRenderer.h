@@ -15,6 +15,7 @@ public:
 	};
 
 	int initialize(std::vector<unsigned int>& indices, std::vector<Vertex>& vertices);
+	void Move(glm::vec4 move);
 	int render();
 
 private:

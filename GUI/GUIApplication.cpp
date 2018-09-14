@@ -25,7 +25,10 @@ void GUIApplication::update(float dt)
 
 void GUIApplication::draw()
 {	
-	ImGui::Button("A Button", ImVec2(300, 100));
+	if(ImGui::Button("A Button", ImVec2(300, 100)))
+	{
+		int a = 0;
+	}
 }
 
 void GUIApplication::shutdown()
