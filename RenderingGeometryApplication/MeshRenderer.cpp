@@ -27,6 +27,11 @@ int MeshRenderer::render()
 	return 1;
 }
 
+std::vector<MeshRenderer::Vertex> MeshRenderer::GetPosition()
+{
+	return m_vertices;
+}
+
 int MeshRenderer::create_buffers()
 {
 	//generate vertex array object

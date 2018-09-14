@@ -17,6 +17,7 @@ public:
 	int initialize(std::vector<unsigned int>& indices, std::vector<Vertex>& vertices);
 	void Move(glm::vec4 move);
 	int render();
+	std::vector<Vertex> GetPosition();
 
 private:
 	std::vector<unsigned int> m_indices;
