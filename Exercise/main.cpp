@@ -19,32 +19,58 @@
 //}
 //=====================================================================
 
-struct Cat
-{
-	char m_Name;
-	int m_Age;
-	void Name(char name)
-	{
-		m_Name = name;
-	}
-};
+//struct Cat
+//{
+//	char m_Name;
+//	int m_Age;
+//	void Name(char name)
+//	{
+//		m_Name = name;
+//	}
+//};
+//
+//int main()
+//{
+//	Cat cats[26];
+//	int current = 97;
+//	int count = 0;
+//	while (count != 26)
+//	{
+//		if(count % 2)
+//		{
+//			cats[count].Name(current - 32);
+//		}
+//		else
+//		{
+//			cats[count].Name(current);
+//		}
+//		count += 1;
+//		current += 1;
+//	}
+//}
+
+#include "Stack.h"
+#include <winerror.h>
 
 int main()
 {
-	Cat cats[26];
-	int current = 97;
-	int count = 0;
-	while (count != 26)
+	Stack stack = Stack();
+	stack.isEmpty();
+
+	stack.Push(3);
+	stack.isEmpty();
+	stack.Push(5);
+	stack.Push(10);
+
+	stack.Pop();
+
+	int num = stack.Top();
+
+
+	Stack stackTwo = Stack();
+	for (int i = 0; i < 30; i++)
 	{
-		if(count % 2)
-		{
-			cats[count].Name(current - 32);
-		}
-		else
-		{
-			cats[count].Name(current);
-		}
-		count += 1;
-		current += 1;
+		stackTwo.Push(i);
 	}
 }
+
