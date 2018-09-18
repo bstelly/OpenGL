@@ -76,14 +76,27 @@ void RenderingGeometryApp::draw()
 	//get an id that is the variable from the shader
 	int variableId = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
 
-	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+	/*glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);*/
 
-	mesh->render();
-	
-	//ANOTHER BOX
-	mvp *= transform.Translate(glm::vec3(m_model[0].x + 10, m_model[1].y, m_model[2].z));
-	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
-	mesh->render();
+	//mesh->render();
+
+
+
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			mvp = m_projection * m_view * transform.m_model * translation;
+			mvp *= transform.Translate(glm::vec3(m_model[0].x + 15, m_model[1].y, m_model[2].z));
+			glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+			mesh->render();
+		}
+		mvp = m_projection * m_view * transform.m_model * translation;
+		mvp *= transform.Translate(glm::vec3(m_model[0].x = 0, m_model[1].y - 15, m_model[2].z));
+		glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+		mesh->render();
+	}
+
 
 	glUseProgram(0);
 }
