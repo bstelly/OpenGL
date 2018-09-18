@@ -65,12 +65,10 @@ void RenderingGeometryApp::draw()
 
 	
 	
-	//send the variable 
 	if (ImGui::SliderInt3("Position", v3, -100, 100));
 	translation = transform.Translate(glm::vec3(v3[0], v3[1], v3[2]));
 	
 	
-	//create a variable to send
 	glm::mat4 mvp = m_projection * m_view * transform.m_model * translation;
 
 	//get an id that is the variable from the shader
@@ -79,23 +77,41 @@ void RenderingGeometryApp::draw()
 	/*glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);*/
 
 	//mesh->render();
-
-
-
-	for (int i = 0; i < 8; i++)
+	int ypos = 4;
+	int xMultiple = 0;
+	for (int i = 1; i <= 64; i++)
 	{
-		for (int j = 0; j < 8; j++)
-		{
-			mvp = m_projection * m_view * transform.m_model * translation;
-			mvp *= transform.Translate(glm::vec3(m_model[0].x + 15, m_model[1].y, m_model[2].z));
-			glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
-			mesh->render();
-		}
-		mvp = m_projection * m_view * transform.m_model * translation;
-		mvp *= transform.Translate(glm::vec3(m_model[0].x = 0, m_model[1].y - 15, m_model[2].z));
-		glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+		glm::mat4 matrix = glm::mat4(1);
+		matrix = glm::translate(matrix, glm::vec3(-20, 0, 0));
+		matrix = glm::translate(matrix,glm::vec3(xMultiple * 4, ypos, 0));
+		glm::mat4 newMVP = m_projection * m_view * matrix * translation;
+		glUniformMatrix4fv(variableId, 1, GL_FALSE, &newMVP[0][0]);
 		mesh->render();
+		xMultiple++;
+		if (xMultiple == 8)
+		{
+			ypos -= 4;
+			xMultiple = 0;
+		}
 	}
+	//for (int i = 1; i < 8; i++)
+	//{
+	//	for (int j = 1; j < 8; j++)
+	//	{
+	//		matrix = glm::mat4(1);
+	//		matrix = glm::translate(matrix, glm::vec3(0, 0, 0));
+	//		matrix *= glm::translate(glm::mat4(1), glm::vec3(10, 0, 0));
+
+	//		mvp = m_projection * m_view * matrix * translation;
+	//		mvp *= transform.Translate(glm::vec3(matrix[0].x + 50, matrix[1].y, matrix[2].z));
+	//		glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+	//		mesh->render();
+	//	}
+	//	mvp = m_projection * m_view * matrix * translation;
+	//	mvp *= transform.Translate(glm::vec3(m_model[0].x = 0, m_model[1].y - 15, m_model[2].z));
+	//	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+	//	mesh->render();
+	//}
 
 
 	glUseProgram(0);
@@ -104,10 +120,4 @@ void RenderingGeometryApp::draw()
 void RenderingGeometryApp::shutdown()
 {
 	
-}
-
-void MakeAGrid()
-{
-	//make an 8 * 8 grid
-	//manipulate the model matrix before rendering
 }
