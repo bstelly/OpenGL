@@ -33,18 +33,19 @@ void RenderingGeometryApp::startup()
 	mesh->initialize(indices, vertices);
 
 	shader = new Shader();
-	shader->Initialize("#version 410\n \
-                        layout(location = 0) in vec4 Position; \
-                        layout(location = 1) in vec4 Color; \
-                        out vec4 vColor; \
-                        uniform mat4 ProjectionViewWorld; \
-                        void main() { vColor = Color; \
-                        gl_Position = ProjectionViewWorld * Position; }",
+	//shader->DefaultLoad("#version 410\n \
+ //                       layout(location = 0) in vec4 Position; \
+ //                       layout(location = 1) in vec4 Color; \
+ //                       out vec4 vColor; \
+ //                       uniform mat4 ProjectionViewWorld; \
+ //                       void main() { vColor = Color; \
+ //                       gl_Position = ProjectionViewWorld * Position; }",
 
-						"#version 410\n \
-                        in vec4 vColor; \
-                        out vec4 FragColor; \
-                        void main() { FragColor = vColor; }");
+	//					"#version 410\n \
+ //                       in vec4 vColor; \
+ //                       out vec4 FragColor; \
+ //                       void main() { FragColor = vColor; }");
+	shader->Load("shader.txt");
 }
 
 int v3[3];
@@ -69,7 +70,7 @@ void RenderingGeometryApp::draw()
 	translation = transform.Translate(glm::vec3(v3[0], v3[1], v3[2]));
 	
 	
-	glm::mat4 mvp = m_projection * m_view * transform.m_model * translation;
+	//glm::mat4 mvp = m_projection * m_view * transform.m_model * translation;
 
 	//get an id that is the variable from the shader
 	int variableId = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
@@ -79,13 +80,12 @@ void RenderingGeometryApp::draw()
 	//mesh->render();
 	int ypos = 4;
 	int xMultiple = 0;
-	for (int i = 1; i <= 64; i++)
+	for (int i = 0; i < 64; i++)
 	{
 		glm::mat4 matrix = glm::mat4(1);
-		matrix = glm::translate(matrix, glm::vec3(-20, 0, 0));
 		matrix = glm::translate(matrix,glm::vec3(xMultiple * 4, ypos, 0));
-		glm::mat4 newMVP = m_projection * m_view * matrix * translation;
-		glUniformMatrix4fv(variableId, 1, GL_FALSE, &newMVP[0][0]);
+		glm::mat4 mvp = m_projection * m_view * matrix * translation;
+		glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
 		mesh->render();
 		xMultiple++;
 		if (xMultiple == 8)
@@ -112,7 +112,6 @@ void RenderingGeometryApp::draw()
 	//	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
 	//	mesh->render();
 	//}
-
 
 	glUseProgram(0);
 }

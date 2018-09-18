@@ -14,6 +14,7 @@ public:
 
 	unsigned int m_program;
 
-	void Initialize(const char* vertexShaderSource, const char* fragmentShaderSource);
+	void DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource);
+	void Load(const char* filename);
 
 };
