@@ -15,11 +15,8 @@ Shader::~Shader()
 	
 }
 
-void Shader::DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource)
+void Shader::SetUp()
 {
-	vsSource = vertexShaderSource;
-	fsSource = fragmentShaderSource;
-
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -36,6 +33,13 @@ void Shader::DefaultLoad(const char* vertexShaderSource, const char* fragmentSha
 	glLinkProgram(m_program);
 }
 
+void Shader::DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource)
+{
+	vsSource = vertexShaderSource;
+	fsSource = fragmentShaderSource;
+	SetUp();
+}
+
 void Shader::Load(const char* filename)
 {
 	const char* line;
@@ -47,6 +51,7 @@ void Shader::Load(const char* filename)
 			(std::istreambuf_iterator<char>()));
 		
 		string vertexShaderSource;
+		string fragmentShaderSource;
 		int counter = 0;
 		int i = 0;
 		while (counter < 2)
@@ -58,8 +63,20 @@ void Shader::Load(const char* filename)
 			vertexShaderSource.append(string() + content[i]);
 			i++;
 		}
-
+		counter = 0;
+		while (counter < 2)
+		{
+			if (content[i] == '"')
+			{
+				counter += 1;
+			}
+			fragmentShaderSource.append(string() + content[i]);
+			i++;
+		}
+		vsSource = vertexShaderSource.c_str();
+		fsSource = fragmentShaderSource.c_str();
 	}
-
+	
 	file.close();
+	SetUp();
 }

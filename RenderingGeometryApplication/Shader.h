@@ -16,5 +16,6 @@ public:
 
 	void DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource);
 	void Load(const char* filename);
+	void SetUp();
 
 };
