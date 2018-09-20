@@ -63,13 +63,4 @@ int MeshRenderer::create_buffers()
 	return 1;
 }
 
-void MeshRenderer::Move(glm::vec4 move)
-{
-	Vertex A = { m_vertices[0].position += move, m_vertices[0].color};
-	Vertex B = { m_vertices[1].position += move, m_vertices[1].color};
-	Vertex C = { m_vertices[2].position += move, m_vertices[2].color};
-	Vertex D = { m_vertices[3].position += move, m_vertices[3].color};
-	std::vector<Vertex> vertices = { A,B,C,D };
-	m_vertices = vertices;
-}
 

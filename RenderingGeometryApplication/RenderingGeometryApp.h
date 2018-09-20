@@ -3,6 +3,7 @@
 #include <Application.h>
 #include "MeshRenderer.h"
 #include "Shader.h"
+#include <vector>
 
 
 class RenderingGeometryApp : public Application
@@ -18,7 +19,9 @@ public:
 	glm::mat4 m_view;
 	glm::mat4 m_projection;
 
-
+	std::vector<glm::vec4> genHalfCircle(int np);
+	void genSphere(std::vector<glm::vec4> points, int numRotations);
+	
 	void startup();
 	void update(float dt);
 	void shutdown();
