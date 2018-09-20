@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Shader
 {
@@ -12,10 +13,15 @@ public:
 	unsigned int vertexShader;
 	unsigned int fragmentShader;
 
+	std::string vsrc;
+	std::string fsrc;
+
+
 	unsigned int m_program;
 
-	void DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource);
-	void Load(const char* filename);
-	void SetUp();
+	void DefaultLoad();
+	void Load(const char* filename, unsigned int type);
+	void Attach();
+	void SetUpFragmentShader();
 
 };

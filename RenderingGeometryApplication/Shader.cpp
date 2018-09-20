@@ -2,12 +2,13 @@
 #include "Shader.h"
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 Shader::Shader()
 {
-	
+
 }
 
 Shader::~Shader()
@@ -15,7 +16,7 @@ Shader::~Shader()
 	
 }
 
-void Shader::SetUp()
+void Shader::Attach()
 {
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -33,50 +34,57 @@ void Shader::SetUp()
 	glLinkProgram(m_program);
 }
 
-void Shader::DefaultLoad(const char* vertexShaderSource, const char* fragmentShaderSource)
+
+void Shader::SetUpFragmentShader()
 {
-	vsSource = vertexShaderSource;
-	fsSource = fragmentShaderSource;
-	SetUp();
+
 }
 
-void Shader::Load(const char* filename)
+void Shader::DefaultLoad()
 {
-	const char* line;
-	fstream file;
-	file.open(filename, ios_base::in);
-	if (file.is_open())
-	{
-		string content((std::istreambuf_iterator<char>(file)),
-			(std::istreambuf_iterator<char>()));
-		
-		string vertexShaderSource;
-		string fragmentShaderSource;
-		int counter = 0;
-		int i = 0;
-		while (counter < 2)
-		{
-			if (content[i] == '"')
-			{
-				counter += 1;
-			}
-			vertexShaderSource.append(string() + content[i]);
-			i++;
-		}
-		counter = 0;
-		while (counter < 2)
-		{
-			if (content[i] == '"')
-			{
-				counter += 1;
-			}
-			fragmentShaderSource.append(string() + content[i]);
-			i++;
-		}
-		vsSource = vertexShaderSource.c_str();
-		fsSource = fragmentShaderSource.c_str();
-	}
-	
-	file.close();
-	SetUp();
+	vsSource = "#version 410\n \
+				layout(location = 0) in vec4 Position; \
+				layout(location = 1) in vec4 Color; \
+				out vec4 vColor; \
+				uniform mat4 ProjectionViewWorld; \
+				void main() { vColor = Color; \
+				gl_Position = ProjectionViewWorld * Position; }";
+
+	fsSource = "#version 410\n \
+				in vec4 vColor; \
+				out vec4 FragColor; \
+				void main() { FragColor = vColor; }";
 }
+
+
+void Shader::Load(const char* filename, unsigned int type)
+{
+	errno_t err;
+	FILE *file;
+
+	err = fopen_s(&file, filename, "r");
+
+	char buf[500];
+	int i = 0;
+	while (std::fgets(buf, sizeof buf, file))
+	{
+		if (type == 1)
+		{
+			vsrc.append(buf);
+		}
+		if (type == 2)
+		{
+			fsrc.append(buf);
+		}
+	}
+	if (type == 1)
+	{
+		vsSource = vsrc.c_str();
+	}
+	if (type == 2)
+	{
+		fsSource = fsrc.c_str();
+	}
+
+}
+
