@@ -23,19 +23,9 @@ void RenderingGeometryApp::startup()
 	std::vector<glm::vec4> points = genHalfCircle(6);
 
 
-	std::vector<unsigned int> indices = { 0, 1, 2, 2, 3, 0 };
-	MeshRenderer::Vertex A = { glm::vec4(-2, 2, 0, 1), glm::vec4(0, 1, 0, 1) };
-	MeshRenderer::Vertex B = { glm::vec4(2, 2, 0, 1), glm::vec4(1, 0, 0, 1) };
-	MeshRenderer::Vertex C = { glm::vec4(2, -2, 0, 1), glm::vec4(0, 0, 1, 1) };
-	MeshRenderer::Vertex D = { glm::vec4(-2, -2, 0, 1), glm::vec4(1, 0.5, 0, 1) };
-	std::vector<MeshRenderer::Vertex> vertices = { A, B, C, D };
-	//for (int i = 0; i < points.size(); i++)
-	//{
-	//	vertices.push_back(MeshRenderer::Vertex({ glm::vec4(points[i].x * 10, points[i].y * 10, 0, 1), glm::vec4(0, 0, 1, 1) }));
-	//}
+	std::vector<unsigned int> indices;
+	std::vector<MeshRenderer::Vertex> vertices;
 	
-
-
 	transform.m_model = glm::mat4(1);
 
 	mesh = new MeshRenderer();
@@ -78,8 +68,9 @@ void RenderingGeometryApp::draw()
 	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
 
 	mesh->render();
-	int ypos = 4;
-	int xMultiple = 0;
+
+	//int ypos = 4;
+	//int xMultiple = 0;
 	//for (int i = 0; i < 64; i++)
 	//{
 	//	glm::mat4 matrix = glm::mat4(1);
@@ -94,6 +85,7 @@ void RenderingGeometryApp::draw()
 	//		xMultiple = 0;
 	//	}
 	//}
+
 	glUseProgram(0);
 }
 
@@ -115,7 +107,48 @@ std::vector<glm::vec4> RenderingGeometryApp::genHalfCircle(int np)
 	return points;
 }
 
-void RenderingGeometryApp::genSphere(std::vector<glm::vec4> points, int numRotations)
+void RenderingGeometryApp::genSphere(std::vector<glm::vec4> points, int meridians)
 {
+	float angle = 3.14 / meridians;
+	std::vector<glm::vec4> totalPoints;
+	
+	for (int i = 0; i < meridians; i++)
+	{
+		float theta = i * angle;
+		for (int j = 0; j < points.size(); j++)
+		{
+			float x = points[j].x * glm::cos(theta) + points[j].z * sin(theta);
+			float y = 0;
+			float z = -points[j].x * sin(theta) + points[j].z * cos(theta);
+			totalPoints.push_back(glm::vec4(x, y, z, 1));
+		}
+	}
+}
 
+
+
+std::vector<unsigned int> genIndices(int np, int nm)
+{
+	std::vector<unsigned int> indices;
+	std::vector<unsigned int> bot_left;
+	std::vector<unsigned int> bot_right;
+	for (int i = 0; i < nm - 1; i++)
+	{
+		for (int i = 0; i < np; i++)
+		{
+			bot_left.push_back(i);
+			bot_right.push_back(i + np);
+		}
+	}
+
+	for (int x = 0; x < bot_left.size(); x++)
+	{
+		indices.push_back(bot_left[x]);
+		indices.push_back(bot_right[x]);
+		if(x % 3 == 0)
+		{
+			indices.push_back(0xFFFF);
+		}
+	}
+	return indices;
 }
