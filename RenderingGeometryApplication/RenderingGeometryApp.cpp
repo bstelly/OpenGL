@@ -3,7 +3,6 @@
 #include "RenderingGeometryApp.h"
 #include <imgui.h>
 #include "Shader.h"
-#include <imgui_internal.h>
 #include "iostream"
 #include "../IntroductionApp/Transform.h"
 
@@ -20,11 +19,18 @@ glm::mat4 translation;
 Transform transform;
 void RenderingGeometryApp::startup()
 {
-	std::vector<glm::vec4> points = genHalfCircle(6);
+	std::vector<glm::vec4> points = genHalfCircle(6, 3);
+	points = genSphere(points, 3);
 
-
-	std::vector<unsigned int> indices;
+	std::vector<unsigned int> indices = genIndices(points.size(), 3);
 	std::vector<MeshRenderer::Vertex> vertices;
+
+
+	for(int i = 0; i < points.size(); i++)
+	{
+		MeshRenderer::Vertex vertex = { points[i], glm::vec4(0, 0, 1, 1) };
+		vertices.push_back(vertex);
+	}
 	
 	transform.m_model = glm::mat4(1);
 
@@ -94,27 +100,25 @@ void RenderingGeometryApp::shutdown()
 	
 }
 
-std::vector<glm::vec4> RenderingGeometryApp::genHalfCircle(int np)
+std::vector<glm::vec4> RenderingGeometryApp::genHalfCircle(int np, int radius)
 {
-	glm::vec4 point;
 	std::vector<glm::vec4> points;
 
 	float angle = 3.14 / np;
 	for (float theta = 0; theta < 3.14; theta += angle)
 	{
-		points.push_back(glm::vec4(glm::cos(theta), glm::sin(theta), 0, 1));
+		points.push_back(glm::vec4(glm::cos(theta) * radius, glm::sin(theta) * radius, 0, 1));
 	}
 	return points;
 }
 
-void RenderingGeometryApp::genSphere(std::vector<glm::vec4> points, int meridians)
+std::vector<glm::vec4> RenderingGeometryApp::genSphere(std::vector<glm::vec4> points, int meridians)
 {
 	float angle = 3.14 / meridians;
 	std::vector<glm::vec4> totalPoints;
 	
-	for (int i = 0; i < meridians; i++)
+	for (int theta = 0; theta < meridians; theta += angle)
 	{
-		float theta = i * angle;
 		for (int j = 0; j < points.size(); j++)
 		{
 			float x = points[j].x * glm::cos(theta) + points[j].z * sin(theta);
@@ -123,6 +127,7 @@ void RenderingGeometryApp::genSphere(std::vector<glm::vec4> points, int meridian
 			totalPoints.push_back(glm::vec4(x, y, z, 1));
 		}
 	}
+	return totalPoints;
 }
 
 
@@ -134,7 +139,7 @@ std::vector<unsigned int> genIndices(int np, int nm)
 	std::vector<unsigned int> bot_right;
 	for (int i = 0; i < nm - 1; i++)
 	{
-		for (int i = 0; i < np; i++)
+		for (int j = 0; j < np; j++)
 		{
 			bot_left.push_back(i);
 			bot_right.push_back(i + np);
@@ -151,4 +156,5 @@ std::vector<unsigned int> genIndices(int np, int nm)
 		}
 	}
 	return indices;
+
 }

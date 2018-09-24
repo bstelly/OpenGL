@@ -10,6 +10,12 @@ public:
 
 	struct Vertex
 	{
+		Vertex();
+		Vertex(glm::vec4 pos, glm::vec4 rgb)
+		{
+			position = pos;
+			color = rgb;
+		}
 		glm::vec4 position;
 		glm::vec4 color;
 	};

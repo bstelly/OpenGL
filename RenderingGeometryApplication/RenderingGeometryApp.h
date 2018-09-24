@@ -19,8 +19,9 @@ public:
 	glm::mat4 m_view;
 	glm::mat4 m_projection;
 
-	std::vector<glm::vec4> genHalfCircle(int np);
-	void genSphere(std::vector<glm::vec4> points, int numRotations);
+	std::vector<glm::vec4> genHalfCircle(int np, int radius);
+	std::vector<glm::vec4> genSphere(std::vector<glm::vec4> points, int numRotations);
+	std::vector<unsigned int> genIndices(int np, int nm);
 	
 	void startup();
 	void update(float dt);
