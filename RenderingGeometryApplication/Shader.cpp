@@ -35,10 +35,7 @@ void Shader::Attach()
 }
 
 
-void Shader::SetUpFragmentShader()
-{
 
-}
 
 void Shader::DefaultLoad()
 {
@@ -54,6 +51,7 @@ void Shader::DefaultLoad()
 				in vec4 vColor; \
 				out vec4 FragColor; \
 				void main() { FragColor = vColor; }";
+	Attach();
 }
 
 
