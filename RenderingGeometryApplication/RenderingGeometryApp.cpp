@@ -20,11 +20,13 @@ Transform transform;
 void RenderingGeometryApp::startup()
 {
 	transform.m_model = glm::mat4(1);
+	int nm = 4;
+	int np = 3;
+	int radius = 5;
+	std::vector<glm::vec4> points = genHalfCircle(np, radius);
+	points = genSphere(points, nm);
 
-	std::vector<glm::vec4> points = genHalfCircle(12, 3);
-	points = genSphere(points, 3);
-
-	std::vector<unsigned int> indices = genIndices(12, 4);
+	std::vector<unsigned int> indices = genIndices(np, nm);
 	std::vector<MeshRenderer::Vertex> vertices;
 
 	for(int i = 0; i < points.size(); i++)
@@ -46,8 +48,7 @@ int v3[3];
 void RenderingGeometryApp::update(float dt)
 {
 	transform.m_model = glm::mat4(1);	
-	glm::vec3 eye = glm::vec3(0, 0, 20);
-	m_view = glm::lookAt(eye, transform.m_model[3].xyz(), glm::vec3(0, 1, 0));
+	m_view = glm::lookAt(glm::vec3(0, 0, 20), transform.m_model[3].xyz(), glm::vec3(0, 1, 0));
 	m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
 }
 
@@ -95,7 +96,7 @@ std::vector<glm::vec4> RenderingGeometryApp::genSphere(std::vector<glm::vec4> po
 
 	std::vector<glm::vec4> totalPoints;
 	
-	for (float i = 0; i < meridians + 1; i++)
+	for (float i = 0; i <= meridians ; i++)
 	{
 		float angle = glm::pi<float>() * 2 / meridians;
 		float theta = i * angle;
@@ -107,6 +108,7 @@ std::vector<glm::vec4> RenderingGeometryApp::genSphere(std::vector<glm::vec4> po
 			totalPoints.push_back(glm::vec4(x, y, z, 1));
 		}
 	}
+
 	return totalPoints;
 }
 
