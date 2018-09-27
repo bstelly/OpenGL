@@ -21,10 +21,10 @@ void RenderingGeometryApp::startup()
 {
 	transform.m_model = glm::mat4(1);
 
-	std::vector<glm::vec4> points = genHalfCircle(3, 3);
+	std::vector<glm::vec4> points = genHalfCircle(12, 3);
 	points = genSphere(points, 3);
 
-	std::vector<unsigned int> indices = genIndices(3, 4);
+	std::vector<unsigned int> indices = genIndices(12, 4);
 	std::vector<MeshRenderer::Vertex> vertices;
 
 	for(int i = 0; i < points.size(); i++)
@@ -102,8 +102,8 @@ std::vector<glm::vec4> RenderingGeometryApp::genSphere(std::vector<glm::vec4> po
 		for (int j = 0; j < points.size(); j++)
 		{
 			float x = points[j].x;
-			float y = points[j].y * glm::cos(theta) + points[j].z * -sin(theta);
-			float z = points[j].z * glm::cos(theta) + points[j].y * sin(theta);
+			float y = points[j].y * cos(theta) + points[j].z * -sin(theta);
+			float z = points[j].z * cos(theta) + points[j].y * sin(theta);
 			totalPoints.push_back(glm::vec4(x, y, z, 1));
 		}
 	}
