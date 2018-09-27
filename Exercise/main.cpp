@@ -158,3 +158,11 @@
 //{
 //	int answer = Sigma(5, 2);
 //}
+
+#include "Number.h"
+
+int main()
+{
+	Number ten = Number(10);
+	ten.Add(50);
+}
