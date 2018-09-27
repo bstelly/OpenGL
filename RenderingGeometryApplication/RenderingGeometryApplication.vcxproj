@@ -132,6 +132,11 @@
     <ClCompile Include="RenderingGeometryApp.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PracticeSetup\PracticeSetup.vcxproj">
+      <Project>{cbd6df65-464e-4923-8bdf-980fe5e68ef9}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

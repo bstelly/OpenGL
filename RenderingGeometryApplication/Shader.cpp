@@ -43,14 +43,17 @@ void Shader::DefaultLoad()
 				layout(location = 0) in vec4 Position; \
 				layout(location = 1) in vec4 Color; \
 				out vec4 vColor; \
+				out vec4 vPosition; \
 				uniform mat4 ProjectionViewWorld; \
 				void main() { vColor = Color; \
+				vPosition = Position;\
 				gl_Position = ProjectionViewWorld * Position; }";
 
 	fsSource = "#version 410\n \
 				in vec4 vColor; \
+				in vec4 vPosition;\
 				out vec4 FragColor; \
-				void main() { FragColor = vColor; }";
+				void main() { FragColor = vPosition; }";
 	Attach();
 }
 

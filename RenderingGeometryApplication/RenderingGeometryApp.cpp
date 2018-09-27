@@ -20,8 +20,8 @@ Transform transform;
 void RenderingGeometryApp::startup()
 {
 	transform.m_model = glm::mat4(1);
-	int nm = 4;
-	int np = 3;
+	int nm = 40;
+	int np = 30;
 	int radius = 5;
 	std::vector<glm::vec4> points = genHalfCircle(np, radius);
 	points = genSphere(points, nm);
@@ -44,11 +44,12 @@ void RenderingGeometryApp::startup()
 
 int v3[3];
 
-
+float running_time = 0.0f;
 void RenderingGeometryApp::update(float dt)
 {
-	transform.m_model = glm::mat4(1);	
-	m_view = glm::lookAt(glm::vec3(0, 0, 20), transform.m_model[3].xyz(), glm::vec3(0, 1, 0));
+	running_time += dt;
+	transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
+	m_view = glm::lookAt(glm::vec3(0, 10, -10), glm::vec3(0), glm::vec3(0, 1, 0));
 	m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
 }
 
@@ -59,9 +60,9 @@ void RenderingGeometryApp::draw()
 	glUseProgram(shader->m_program);
 
 	if (ImGui::SliderInt3("Position", v3, -100, 100));
-	translation = transform.Translate(glm::vec3(v3[0], v3[1], v3[2]));
+	auto trans = glm::translate(transform.m_model, glm::vec3(v3[0], v3[1], v3[2]));
 	
-	glm::mat4 mvp = m_projection * m_view * transform.m_model * translation;
+	glm::mat4 mvp = m_projection * m_view * transform.m_model * trans;
 
 	//get an id that is the variable from the shader
 	int variableId = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");

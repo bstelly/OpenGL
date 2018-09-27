@@ -25,9 +25,8 @@ Transform::~Transform()
 glm::mat4 Transform::Translate(glm::vec3 move)
 {
 	glm::mat4 translation = glm::mat4(1);
-	translation[3].xyz = move;
-	m_model = m_model + translation;
-	return m_model;
+	translation[3].xyz = move;	
+	return m_model * translation;;
 }
 
 glm::mat4 Transform::Rotate(float radius, glm::vec3 axis)

@@ -142,7 +142,6 @@
 //	test->theMethod(var);
 //}
 
-
 ////Summation Notation
 //int Sigma(int n, int i)
 //{
@@ -165,4 +164,5 @@ int main()
 {
 	Number ten = Number(10);
 	ten.Add(50);
+
 }
