@@ -31,7 +31,9 @@ void RenderingGeometryApp::startup()
 
 
 	shader = new Shader();
-	shader->DefaultLoad();
+	shader->Load("vertexShader.txt", 1);
+	shader->Load("fragmentShader.txt", 2);
+	shader->Attach();
 }
 
 int v3[3];
@@ -40,7 +42,7 @@ float running_time = 0.0f;
 void RenderingGeometryApp::update(float dt)
 {
 	running_time += dt;
-	transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
+	//transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
 	m_view = glm::lookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
 	m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
 }
@@ -57,9 +59,24 @@ void RenderingGeometryApp::draw()
 	glm::mat4 mvp = m_projection * m_view * transform.m_model * trans;
 
 	//get an id that is the variable from the shader
-	int variableId = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
+	int mvpHandle = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
+	int lpHandle = glGetUniformLocation(shader->m_program, "lightPosition");
+	int ldHandle = glGetUniformLocation(shader->m_program, "lightDirection");
+	int lcHandle = glGetUniformLocation(shader->m_program, "lightColor");
+	int cameraPosHandle = glGetUniformLocation(shader->m_program, "cameraPosition");
 
-	glUniformMatrix4fv(variableId, 1, GL_FALSE, &mvp[0][0]);
+
+	glm::vec3 lp = glm::vec3(1, 1, 0);
+	glm::vec3 ld = glm::vec3(-1, -1, 0);
+	glm::vec4 lc = glm::vec4(1, 0, 0, 1);
+	glm::vec3 camPos = glm::vec3(0, 0, 0);
+	//ld *= glm::cos(running_time);
+
+	glUniformMatrix4fv(mvpHandle, 1, GL_FALSE, &mvp[0][0]);
+	glUniform3fv(lpHandle, 1, &lp[0]);
+	glUniform3fv(ldHandle, 1, &ld[0]);
+	glUniform4fv(lcHandle, 1, &lc[0]);
+	glUniform3fv(cameraPosHandle, 1, &camPos[0]);
 
 	mesh->render();
 

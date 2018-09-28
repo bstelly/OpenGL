@@ -16,6 +16,7 @@ public:
 			position = pos;
 			color = rgb;
 		}
+
 		glm::vec4 position;
 		glm::vec4 color;
 	};
