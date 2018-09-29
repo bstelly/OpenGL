@@ -33,6 +33,4 @@ private:
 	unsigned int m_ibo;
 
 	int create_buffers();
-
-
 };

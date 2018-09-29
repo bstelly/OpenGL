@@ -22,7 +22,7 @@ public:
 	std::vector<glm::vec4> genHalfCircle(int np, int radius);
 	std::vector<glm::vec4> genSphere(int radius, int numPoints, int meridians);
 	std::vector<unsigned int> genIndices(int np, int nm);
-	std::vector<glm::vec4> genCube();
+	void genCube();
 	void genPlane();
 	
 	void startup();
