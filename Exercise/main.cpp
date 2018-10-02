@@ -93,7 +93,6 @@
 //	const char * ans = a.pointer;
 //}
 
-
 //#include <iostream>
 ////You are to create a class that contains a method
 ////and one const char* the method takes as an argument a const char*
@@ -158,11 +157,30 @@
 //	int answer = Sigma(5, 2);
 //}
 
-#include "Number.h"
+//#include "Number.h"
+//
+//int main()
+//{
+//	Number ten = Number(10);
+//	ten.Add(50);
+//
+//}
+
+#include "Human.h"
+#include "Dog.h"
+// 1. What is polymorphism?
+// -Polymorphism is when an object can take different forms/types.
 
 int main()
 {
-	Number ten = Number(10);
-	ten.Add(50);
+	Entity* person;
+	Human* person = new Human("Human");
+	Dog dog = Dog("Dog");
+
+	dog = person->Polymorph();
+	
 
 }
+
+
+
