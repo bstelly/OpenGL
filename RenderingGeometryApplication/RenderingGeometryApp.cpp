@@ -25,9 +25,9 @@ void RenderingGeometryApp::startup()
 	int nm = 20;
 	int np = 20;
 	int radius = 5;
-	//genSphere(radius, np, nm);
+	genSphere(radius, np, nm);
 	//genCube();
-	genPlane();
+	//genPlane();
 
 
 	shader = new Shader();
