@@ -21,6 +21,4 @@ protected:
 	float m_runningTime;
 
 	FlyCamera* myCamera = new FlyCamera;
-
-
 };

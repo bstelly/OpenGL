@@ -25,7 +25,7 @@ void RenderingGeometryApp::startup()
 	int nm = 20;
 	int np = 20;
 	int radius = 5;
-	genSphere(radius, np, nm);
+	//genSphere(radius, np, nm);
 	//genCube();
 	//genPlane();
 
@@ -68,8 +68,8 @@ void RenderingGeometryApp::draw()
 
 	glm::vec3 lp = glm::vec3(1, 1, 0);
 	glm::vec3 ld = glm::vec3(-1, -1, 0);
-	glm::vec4 lc = glm::vec4(1, 0, 0, 1);
-	glm::vec3 camPos = glm::vec3(0, 0, 0);
+	glm::vec4 lc = glm::vec4(1, 1, 1, 1);
+	glm::vec3 camPos = glm::vec3(0, 0, -10);
 	//ld *= glm::cos(running_time);
 
 	glUniformMatrix4fv(mvpHandle, 1, GL_FALSE, &mvp[0][0]);
@@ -137,10 +137,9 @@ void RenderingGeometryApp::genPlane()
 	mesh->initialize(indices, vertices);
 }
 
-std::vector<glm::vec4> RenderingGeometryApp::genSphere(int radius, int numPoints, int meridians)
+void RenderingGeometryApp::genSphere(int radius, int numPoints, int meridians)
 {
 	std::vector<glm::vec4> points = genHalfCircle(numPoints, radius);
-
 	std::vector<glm::vec4> totalPoints;
 
 	for (float i = 0; i <= meridians; i++)
@@ -161,13 +160,11 @@ std::vector<glm::vec4> RenderingGeometryApp::genSphere(int radius, int numPoints
 
 	for (int i = 0; i < totalPoints.size(); i++)
 	{
-		MeshRenderer::Vertex vertex = { totalPoints[i], glm::vec4(1) };
+		MeshRenderer::Vertex vertex = { totalPoints[i], glm::vec4(0, 0, 1, 1) };
 		vertices.push_back(vertex);
 	}
 	
 	mesh->initialize(indices, vertices);
-
-	return totalPoints;
 }
 
 void RenderingGeometryApp::genCube()

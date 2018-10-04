@@ -66,7 +66,7 @@ void Shader::DefaultLoad()
 				in vec4 vColor; \
 				in vec4 vPosition;\
 				out vec4 FragColor; \
-				void main() { FragColor = vPosition; }";
+				void main() { FragColor = vColor; }";
 	Attach();
 }
 

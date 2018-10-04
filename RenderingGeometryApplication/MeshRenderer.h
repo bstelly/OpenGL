@@ -19,6 +19,7 @@ public:
 
 		glm::vec4 position;
 		glm::vec4 color;
+		glm::vec4 normal;
 	};
 
 	int initialize(std::vector<unsigned int>& indices, std::vector<Vertex>& vertices);
