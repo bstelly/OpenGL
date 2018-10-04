@@ -166,21 +166,32 @@
 //
 //}
 
-#include "Human.h"
-#include "Dog.h"
-// 1. What is polymorphism?
-// -Polymorphism is when an object can take different forms/types.
+//#include "Human.h"
+//#include "Dog.h"
+//// 1. What is polymorphism?
+//// -Polymorphism is when an object can take different forms/types.
+//
+//int main()
+//{
+//	Entity* person;
+//	Human* person = new Human("Human");
+//	Dog dog = Dog("Dog");
+//
+//	dog = person->Polymorph();
+//}
+
+void MultiplyArray(int inputArray[], int size, int outputArray[])
+{
+	for (int i = 0; i < size; i++)
+	{
+		outputArray[i] = inputArray[i] * i;
+	}
+}
 
 int main()
 {
-	Entity* person;
-	Human* person = new Human("Human");
-	Dog dog = Dog("Dog");
-
-	dog = person->Polymorph();
-	
-
+	int arrayOne[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int arrayTwo[10];
+	MultiplyArray(arrayOne, 10, arrayTwo);
 }
-
-
 
