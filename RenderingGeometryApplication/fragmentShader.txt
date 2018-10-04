@@ -39,11 +39,14 @@ void main()
 	float lambert = dot(-lightDirection, vertexNormal);
 	vec4 diffuse = vColor * lambert * lightColor;
 	
-	vec3 reflectedRay = lightPosition - vPosition.xyz;
-	vec3 viewRay = cameraPosition - vPosition;
-	float specularPower = .5;
+	vec3 lightDirNorm = normalize(lightDirection);
+	vec3 viewRay = normalize(cameraPosition - vPosition.xyz);
+	vec3 reflectedRay = viewRay + -lightDirNorm;
+	float viewDot = dot(reflectedRay, vertexNormal);
+	float specularPower = 1;
+	float specularTerm = pow(max(0, viewDot), 7);
 	
 
-	vec4 specular = vColor * (reflectedRay * viewRay) * specularPower * lightColor;
+	vec4 specular = vColor * specularTerm * specularPower * lightColor;
 	FragColor = ambient + diffuse + specular;
 }
