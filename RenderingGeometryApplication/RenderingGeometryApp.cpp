@@ -6,7 +6,6 @@
 #include <iostream>
 #include <Transform.h>
 
-
 RenderingGeometryApp::RenderingGeometryApp()
 {
 }
@@ -25,7 +24,7 @@ void RenderingGeometryApp::startup()
 	int nm = 20;
 	int np = 20;
 	int radius = 5;
-	//genSphere(radius, np, nm);
+	genSphere(radius, np, nm);
 	//genCube();
 	//genPlane();
 
@@ -42,9 +41,13 @@ float running_time = 0.0f;
 void RenderingGeometryApp::update(float dt)
 {
 	running_time += dt;
-	transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
-	m_view = glm::lookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
-	m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
+	//transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
+	m_view = camera->SetLookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
+	//m_view = glm::lookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
+	//m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
+	//m_projection = camera->SetPerspective(90, 800 / (float)600, .1f, 1000.f);
+	m_projection = camera->SetOrthographic(-10, 10, 10, -10, .1f, 1000.f);
+	
 }
 
 float speed = 3;

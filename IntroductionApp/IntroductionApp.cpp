@@ -8,9 +8,9 @@
 void IntroductionApp::startup()
 {
 	Gizmos::create();
-	myCamera->SetLookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
-	myCamera->SetPerspective(glm::pi<float>()*0.25f, 16 / 9.0f, 0.1f, 1000.0f);	
-	myCamera->SetSpeed(5.0f);
+	flyCamera->SetLookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
+	flyCamera->SetPerspective(90, 16 / 9.0f, 0.1f, 1000.0f);	
+	flyCamera->SetSpeed(5.0f);
 
 }
 
@@ -34,7 +34,7 @@ void IntroductionApp::draw()
 {
 	Gizmos::clear();
 	Gizmos::addSphere(glm::vec3(0, 0, 0), 10, 20, 20, glm::vec4(.05, .05, .50, 1), &model);
-	Gizmos::draw(myCamera->GetProjection() * myCamera->GetView() *  myCamera->GetWorldTransform());
+	Gizmos::draw(flyCamera->GetProjection() * flyCamera->GetView() *  flyCamera->GetWorldTransform());
 }
 
 void IntroductionApp::shutdown()

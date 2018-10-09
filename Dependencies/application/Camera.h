@@ -16,9 +16,9 @@ protected:
 public:
 	Camera();
 	~Camera();
-	virtual void Update(GLFWwindow * window, float deltaTime) = 0;
-	void SetPerspective(float fieldOfView, float aspectRatio, float near, float far);
-	void SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up);
+	glm::mat4 SetPerspective(float fieldOfView, float aspectRatio, float near, float far);
+	glm::mat4 SetOrthographic(float left, float right, float top, float bottom, float far, float near);
+	glm::mat4 SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up);
 	void SetPosition(glm::vec3 position);
 	glm::mat4 GetWorldTransform();
 	glm::mat4 GetView();
