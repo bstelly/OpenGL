@@ -27,7 +27,6 @@ glm::mat4 Camera::SetPerspective(float fieldOfView, float aspectRatio, float nea
 	projectionTransform[2].z = -((far + near) / (far - near));
 	projectionTransform[3].z = -((2 * far * near) / (far - near));
 	projectionTransform[2].w = -1;
-	auto expected = glm::perspective(fieldOfView, aspectRatio, near, far);
 
 	return projectionTransform;
 }
@@ -49,7 +48,6 @@ glm::mat4 Camera::SetOrthographic(float left, float right, float top, float bott
 
 glm::mat4 Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 {
-	//viewTransform = glm::lookAt(from, to, up);
 	glm::vec3 forward = glm::normalize(from - to);
 	glm::vec3 right = glm::cross(glm::normalize(up), forward);
 	glm::vec3 _up = glm::cross(forward, right);
@@ -69,7 +67,6 @@ glm::mat4 Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 	viewTransform[3][1] = from.y;
 	viewTransform[3][2] = from.z;
 
-	auto expected = glm::lookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
 	return viewTransform;
 }
 
