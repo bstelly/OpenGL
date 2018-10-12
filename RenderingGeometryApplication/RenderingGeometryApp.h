@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include <vector>
+#include "Texture.h"
 
 
 class RenderingGeometryApp : public Application
@@ -15,6 +16,7 @@ public:
 	
 	MeshRenderer* mesh;
 	Shader* shader;
+	Texture* texture = new Texture();
 	
 
 	

@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\glfw;$(SolutionDir)Dependencies\application;$(SolutionDir)Dependencies\glm;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\stb\deprecated;$(SolutionDir)Dependencies\stb;$(SolutionDir)Dependencies\glfw;$(SolutionDir)Dependencies\application;$(SolutionDir)Dependencies\glm;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\glm\glm;$(SolutionDir)Dependencies\glfw\lib;$(SolutionDir)Dependencies\application\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -126,6 +126,8 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="RenderingGeometryApp.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Light.cpp" />
@@ -133,6 +135,8 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="RenderingGeometryApp.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stb_image.c" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PracticeSetup\PracticeSetup.vcxproj">
