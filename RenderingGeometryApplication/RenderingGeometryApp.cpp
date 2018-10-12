@@ -45,12 +45,11 @@ void RenderingGeometryApp::update(float dt)
 	running_time += dt;
 	//transform.m_model = glm::mat4(1) * glm::rotate(glm::mat4(1), running_time, glm::vec3(1,0,0));
 	m_view = camera->SetLookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
-	//m_view = glm::lookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
-	//Perspective view
+	///Perspective view
 	//m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
 	//m_projection = camera->SetPerspective(90, 800 / (float)600, .1f, 1000.f);
-	//Orthographic view
-	//m_projection = camera->SetOrthographic(-10, 10, 10, -10, .1f, 1000.f);
+	///Orthographic view
+	m_projection = camera->SetOrthographic(-20, 20, 20, -20, .1f, 1000.f);
 	
 }
 
@@ -79,14 +78,14 @@ void RenderingGeometryApp::draw()
 	//glm::vec4 lc = glm::vec4(1, 1, 1, 1);
 	//glm::vec3 camPos = glm::vec3(0, 0, -10);
 	//ld *= glm::cos(running_time);
+	glm::vec2 tex = glm::vec2(0, 0);
 
 	glUniformMatrix4fv(mvpHandle, 1, GL_FALSE, &mvp[0][0]);
-	glUniformMatrix2fv(texture->getHandle(), 1, GL_FALSE, 0);
+	glUniformMatrix2fv(textureHandle, 1, GL_FALSE, &tex[0]);
 	//glUniform3fv(lpHandle, 1, &lp[0]);
 	//glUniform3fv(ldHandle, 1, &ld[0]);
 	//glUniform4fv(lcHandle, 1, &lc[0]);
 	//glUniform3fv(cameraPosHandle, 1, &camPos[0]);
-
 	mesh->render();
 
 	glUseProgram(0);
@@ -137,10 +136,10 @@ std::vector<unsigned int> RenderingGeometryApp::genIndices(int np, int nm)
 void RenderingGeometryApp::genPlane()
 {
 	std::vector<unsigned int> indices = { 0, 1, 2, 2, 3, 0 };
-	MeshRenderer::Vertex A = { glm::vec4(-10, 10, 0, 1), glm::vec4(1, 0, 0, 1) };
-	MeshRenderer::Vertex B = { glm::vec4(10, 10, 0, 1), glm::vec4(0, 1, 0, 1) };
-	MeshRenderer::Vertex C = { glm::vec4(10, -10, 0, 1), glm::vec4(0, 0, 1, 1) };
-	MeshRenderer::Vertex D = { glm::vec4(-10, -10, 0, 1), glm::vec4(0, 0, 0, 1) };
+	MeshRenderer::Vertex A = { glm::vec4(-10, 10, 0, 1), glm::vec4(1, 0, 0, 1), glm::vec2(0, 0)};
+	MeshRenderer::Vertex B = { glm::vec4(10, 10, 0, 1), glm::vec4(0, 1, 0, 1) , glm::vec2(1, 0)};
+	MeshRenderer::Vertex C = { glm::vec4(10, -10, 0, 1), glm::vec4(0, 0, 1, 1), glm::vec2(1, 1)};
+	MeshRenderer::Vertex D = { glm::vec4(-10, -10, 0, 1), glm::vec4(0, 0, 0, 1), glm::vec2(0, 1)};
 	std::vector<MeshRenderer::Vertex> vertices = { A, B, C, D };
 
 	mesh->initialize(indices, vertices);

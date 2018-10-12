@@ -61,11 +61,11 @@ int MeshRenderer::create_buffers()
 
 	//Normals
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)16);
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)16);
 
 	//UVs
 	glEnableVertexAttribArray(3);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
 
 
 	glBindVertexArray(0);

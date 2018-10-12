@@ -16,11 +16,17 @@ public:
 			position = pos;
 			color = rgb;
 		}
+		Vertex(glm::vec4 pos, glm::vec4 rgb, glm::vec2 uv)
+		{
+			position = pos;
+			color = rgb;
+			_uv = uv;
+		}
 
 		glm::vec4 position;
 		glm::vec4 color;
 		glm::vec4 normal;
-		glm::vec2 uv;
+		glm::vec2 _uv;
 	};
 
 	int initialize(std::vector<unsigned int>& indices, std::vector<Vertex>& vertices);

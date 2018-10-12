@@ -10,5 +10,5 @@ uniform mat4 ProjectionViewWorld;
 void main()
 {
 	vUV = UV;
-	gl_Position = ProjectionViewModel * Position;
+	gl_Position = ProjectionViewWorld * Position;
 }

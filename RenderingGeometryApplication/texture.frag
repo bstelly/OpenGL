@@ -3,7 +3,7 @@
 out vec4 FragColour;
 in vec2 vUV;
 
-uniform sampler2D texture;
+uniform sampler2D diffuseTexture;
 
 void main()
 {

@@ -23,15 +23,13 @@ void CameraApplication::startup()
 
 void CameraApplication::update(float dt)
 {
-	Transform transform = Transform();
-	transform.m_model = model;
-	model = transform.Rotate(dt, glm::vec3(0, 1, 0));
+	//Transform transform = Transform();
+	//transform.m_model = model;
+	//model = transform.Rotate(dt, glm::vec3(0, 1, 0));
 }
 
 void CameraApplication::draw()
 {
-	Gizmos::clear();
-	Gizmos::addSphere(glm::vec3(0, 0, 0), 10, 20, 20, glm::vec4(.05, .05, .50, 1), &model);
 	Gizmos::draw(cam->GetProjection() * cam->GetView() *  cam->GetWorldTransform());
 }
 
