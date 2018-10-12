@@ -25,6 +25,8 @@ int MeshRenderer::render()
 	glPrimitiveRestartIndex(0xFFFF);
 	glEnable(GL_PRIMITIVE_RESTART);
 	glDrawElements(GL_TRIANGLE_STRIP, m_indices.size(), GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+
 	glDisable(GL_PRIMITIVE_RESTART);
 	glBindVertexArray(0);
 	return 1;
