@@ -24,14 +24,14 @@ void RenderingGeometryApp::startup()
 	int nm = 20;
 	int np = 20;
 	int radius = 5;
-	//genSphere(radius, np, nm);
+	genSphere(radius, np, nm);
 	//genCube();
-	genPlane();
+	//genPlane();
 
 
 	shader = new Shader();
-	shader->Load("texture.vert", 1);
-	shader->Load("texture.frag", 2);
+	shader->Load("shader.vert", 1);
+	shader->Load("shader.frag", 2);
 	shader->Attach();
 	texture->load("earth_lights.jpg");
 
@@ -47,9 +47,9 @@ void RenderingGeometryApp::update(float dt)
 	m_view = camera->SetLookAt(glm::vec3(0, 0, 20), glm::vec3(0), glm::vec3(0, 1, 0));
 	///Perspective view
 	//m_projection = glm::perspective(glm::quarter_pi<float>(), 800 / (float)600, 0.1f, 1000.f);
-	//m_projection = camera->SetPerspective(90, 800 / (float)600, .1f, 1000.f);
+	m_projection = camera->SetPerspective(90, 800 / (float)600, .1f, 1000.f);
 	///Orthographic view
-	m_projection = camera->SetOrthographic(-20, 20, 20, -20, .1f, 1000.f);
+	//m_projection = camera->SetOrthographic(-20, 20, 20, -20, .1f, 1000.f);
 	
 }
 
@@ -66,26 +66,28 @@ void RenderingGeometryApp::draw()
 
 	//get an id that is the variable from the shader
 	int mvpHandle = glGetUniformLocation(shader->m_program, "ProjectionViewWorld");
-	int textureHandle = glGetUniformLocation(shader->m_program, "texture");
-	//int lpHandle = glGetUniformLocation(shader->m_program, "lightPosition");
-	//int ldHandle = glGetUniformLocation(shader->m_program, "lightDirection");
-	//int lcHandle = glGetUniformLocation(shader->m_program, "lightColor");
-	//int cameraPosHandle = glGetUniformLocation(shader->m_program, "cameraPosition");
+	//int textureHandle = glGetUniformLocation(shader->m_program, "texture");
+	int lpHandle = glGetUniformLocation(shader->m_program, "lightPosition");
+	int ldHandle = glGetUniformLocation(shader->m_program, "lightDirection");
+	int lcHandle = glGetUniformLocation(shader->m_program, "lightColor");
+	int cameraPosHandle = glGetUniformLocation(shader->m_program, "cameraPosition");
 
 
-	//glm::vec3 lp = glm::vec3(1, 1, 0);
-	//glm::vec3 ld = glm::vec3(-1, -1, 0);
-	//glm::vec4 lc = glm::vec4(1, 1, 1, 1);
-	//glm::vec3 camPos = glm::vec3(0, 0, -10);
+	glm::vec3 lp = glm::vec3(1, 1, 0);
+	glm::vec3 ld = glm::vec3(-1, -1, 0);
+	glm::vec4 lc = glm::vec4(1, 1, 1, 1);
+	glm::vec3 camPos = glm::vec3(0, 0, -10);
+	//glm::vec2 tex = glm::vec2(0, 0);
+
 	//ld *= glm::cos(running_time);
-	glm::vec2 tex = glm::vec2(0, 0);
+
 
 	glUniformMatrix4fv(mvpHandle, 1, GL_FALSE, &mvp[0][0]);
-	glUniformMatrix2fv(textureHandle, 1, GL_FALSE, &tex[0]);
-	//glUniform3fv(lpHandle, 1, &lp[0]);
-	//glUniform3fv(ldHandle, 1, &ld[0]);
-	//glUniform4fv(lcHandle, 1, &lc[0]);
-	//glUniform3fv(cameraPosHandle, 1, &camPos[0]);
+	//glUniformMatrix2fv(textureHandle, 1, GL_FALSE, &tex[0]);
+	glUniform3fv(lpHandle, 1, &lp[0]);
+	glUniform3fv(ldHandle, 1, &ld[0]);
+	glUniform4fv(lcHandle, 1, &lc[0]);
+	glUniform3fv(cameraPosHandle, 1, &camPos[0]);
 	mesh->render();
 
 	glUseProgram(0);

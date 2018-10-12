@@ -19,7 +19,7 @@ void main()
 	//specular
 	float specularStrength = 5;
 	vec3 viewDir = normalize(cameraPosition - vPosition.xyz);
-	vec3 reflectDir = reflect(normalize(-lightDirection), vertexNormal);
+	vec3 reflectDir = reflect(normalize(-lightPosition), vertexNormal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
 	//vec4 specular = specularStrength * spec * lightColor;
 	vec4 specular = vec4(1, 1, 1, 1) * vColor * spec;
