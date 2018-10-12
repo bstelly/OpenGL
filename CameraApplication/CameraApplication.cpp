@@ -30,6 +30,8 @@ void CameraApplication::update(float dt)
 
 void CameraApplication::draw()
 {
+	Gizmos::clear();
+	Gizmos::addSphere(glm::vec3(0, 0, 0), 10, 20, 20, glm::vec4(.05, .05, .50, 1), &model);
 	Gizmos::draw(cam->GetProjection() * cam->GetView() *  cam->GetWorldTransform());
 }
 
