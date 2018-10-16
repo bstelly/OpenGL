@@ -24,16 +24,17 @@ void RenderingGeometryApp::startup()
 	int nm = 20;
 	int np = 20;
 	int radius = 5;
-	genSphere(radius, np, nm);
-	//genCube();
+	//genSphere(radius, np, nm);
+	genCube();
 	//genPlane();
 
 
 	shader = new Shader();
-	shader->Load("shader.vert", 1);
-	shader->Load("shader.frag", 2);
+	//shader->Load("shader.vert", 1);
+	//shader->Load("shader.frag", 2);
+	shader->DefaultLoad();
 	shader->Attach();
-	texture->load("earth_lights.jpg");
+	//texture->load("earth_lights.jpg");
 
 }
 
@@ -182,25 +183,25 @@ void RenderingGeometryApp::genCube()
 	std::vector<MeshRenderer::Vertex> vertices
 	{
 		//front
-		{ glm::vec4(0.0, 1.0, 1.0, 1.0), glm::vec4(1, 0, 0, 1) },
-		{ glm::vec4(1.0, 1.0, 1.0, 1.0), glm::vec4(0, 1, 0, 1) },
-		{ glm::vec4(1.0, 0.0, 1.0, 1.0), glm::vec4(0, 0, 1, 1) },
-		{ glm::vec4(0.0, 0.0, 1.0, 1.0), glm::vec4(1, 1, 0, 1) },
+		{ glm::vec4(0, 10, 10, 1), glm::vec4(10, 0, 0, 1) },
+		{ glm::vec4(10, 10, 10, 1), glm::vec4(0, 10, 0, 1) },
+		{ glm::vec4(10, 0, 10, 1), glm::vec4(0, 0, 10, 1) },
+		{ glm::vec4(0, 0, 10, 1), glm::vec4(10, 10, 0, 1) },
 		//bot
-		{ glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec4(1, 0, 0, 1) },
-		{ glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec4(0, 1, 1, 1) },
+		{ glm::vec4(0, 0, 0, 1), glm::vec4(10, 0, 0, 1) },
+		{ glm::vec4(10, 0, 0, 1), glm::vec4(0, 10, 10, 1) },
 		//back
-		{ glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec4(1, 1, 1, 1) },
-		{ glm::vec4(0.0, 1.0, 0.0, 1.0), glm::vec4(1, 0, 0, 1) },
+		{ glm::vec4(10, 10, 0, 1), glm::vec4(10, 10, 10, 1) },
+		{ glm::vec4(0, 10, 0, 1), glm::vec4(10, 0, 0, 1) },
 		//top
-		{ glm::vec4(0.0, 1.0, 1.0, 1.0), glm::vec4(1, 1, 1, 1) },
-		{ glm::vec4(1.0, 1.0, 1.0, 1.0), glm::vec4(1, 0, 1, 1) },
+		{ glm::vec4(0, 10, 10, 1), glm::vec4(10, 10, 10, 1) },
+		{ glm::vec4(10, 10, 10, 1), glm::vec4(10, 0, 10, 1) },
 		//right
-		{ glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec4(1, 0, 1, 1) },
-		{ glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec4(1, 0, 1, 1) },
+		{ glm::vec4(10, 10, 0, 1), glm::vec4(10, 0, 10, 1) },
+		{ glm::vec4(10, 0, 0, 1), glm::vec4(10, 0, 10, 1) },
 		//left
-		{ glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec4(1, 0, 1, 1) },
-		{ glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec4(1, 0, 0, 1) }
+		{ glm::vec4(10, 10, 0, 1), glm::vec4(10, 0, 10, 1) },
+		{ glm::vec4(0, 0, 0, 1), glm::vec4(10, 0, 0, 1) }
 	};
 	std::vector<unsigned int> indices =
 	{
