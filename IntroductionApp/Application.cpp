@@ -42,7 +42,7 @@ void Application::run(const char * title, unsigned int width, unsigned int heigh
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		update(dt);
-
+		flyCamera->Update(m_window, dt);
 
 		ImGui_ImplGlfwGL3_NewFrame();
 

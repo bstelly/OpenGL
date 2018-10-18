@@ -17,3 +17,5 @@ public:
 	glm::mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 	Camera* cam = new Camera;
 };
+
+

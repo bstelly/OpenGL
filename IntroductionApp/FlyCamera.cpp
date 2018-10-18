@@ -30,6 +30,24 @@ void FlyCamera::Update(GLFWwindow* window, float deltaTime)
 	{
 		SetPosition(glm::vec3(-m_speed * deltaTime, 0, 0));
 	}
+
+	Transform* transform = new Transform();
+	if (glfwGetKey(window, GLFW_KEY_RIGHT))
+	{
+		transform->Rotate(1, glm::vec3(0, 1, 0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT))
+	{
+		transform->Rotate(-1, glm::vec3(0, 1, 0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_UP))
+	{
+		transform->Rotate(1, glm::vec3(1, 0, 0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN))
+	{
+		transform->Rotate(-1, glm::vec3(1, 0, 0));
+	}
 }
 
 void FlyCamera::SetSpeed(float speed)

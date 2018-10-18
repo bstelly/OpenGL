@@ -15,8 +15,7 @@ Camera::~Camera()
 
 void Camera::UpdateProjectionViewTransform()
 {
-	//viewTransform = glm::inverse(worldTransform);
-	//projectionTransform =  projectionTransform * viewTransform;
+	projectionViewTransform = projectionTransform * viewTransform;
 }
 
 glm::mat4 Camera::SetPerspective(float fieldOfView, float aspectRatio, float near, float far)
