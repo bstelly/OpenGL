@@ -15,7 +15,6 @@ Camera::~Camera()
 
 void Camera::UpdateProjectionViewTransform()
 {
-	viewTransform = glm::inverse(worldTransform);
 	projectionViewTransform =  projectionTransform * viewTransform;
 }
 

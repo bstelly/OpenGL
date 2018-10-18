@@ -15,10 +15,8 @@ CameraApplication::~CameraApplication()
 
 void CameraApplication::startup()
 {
-	Gizmos::create();
 	cam->SetLookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
 	cam->SetPerspective(90, 16 / 9.0f, 0.1f, 1000.0f);
-
 }
 
 void CameraApplication::update(float dt)
@@ -30,12 +28,9 @@ void CameraApplication::update(float dt)
 
 void CameraApplication::draw()
 {
-	Gizmos::clear();
-	Gizmos::addSphere(glm::vec3(0, 0, 0), 10, 20, 20, glm::vec4(.05, .05, .50, 1), &model);
-	Gizmos::draw(cam->GetProjection() * cam->GetView() *  cam->GetWorldTransform());
+
 }
 
 void CameraApplication::shutdown()
 {
-	Gizmos::destroy();
 }

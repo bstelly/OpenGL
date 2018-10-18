@@ -48,7 +48,6 @@ glm::mat4 Camera::SetOrthographic(float left, float right, float top, float bott
 
 glm::mat4 Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 {
-	//viewTransform = glm::lookAt(from, to, up);
 	glm::vec3 forward = glm::normalize(from - to);
 	glm::vec3 right = glm::cross(glm::normalize(up), forward);
 	glm::vec3 _up = glm::cross(forward, right);

@@ -180,18 +180,90 @@
 //	dog = person->Polymorph();
 //}
 
-void MultiplyArray(int inputArray[], int size, int outputArray[])
-{
-	for (int i = 0; i < size; i++)
+//void MultiplyArray(int inputArray[], int size, int outputArray[])
+//{
+//	for (int i = 0; i < size; i++)
+//	{
+//		outputArray[i] = inputArray[i] * i;
+//	}
+//}
+//
+//int main()
+//{
+//	int arrayOne[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	int arrayTwo[10];
+//	MultiplyArray(arrayOne, 10, arrayTwo);
+//}
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+// Complete the hourglassSum function below.
+int hourglassSum(vector<vector<int>> arr) {
+
+	//find the hourglasses
+	vector<vector<int>> hourglasses(16);
+	vector<int> hourglass(7);
+	int row = 0;
+	int col = 0;
+
+	for (int i = 0; i < hourglasses.size(); i++)
 	{
-		outputArray[i] = inputArray[i] * i;
+		hourglass[0] = arr[row][col];
+		hourglass[1] = arr[row][col + 1];
+		hourglass[2] = arr[row][col + 2];
+		hourglass[3] = arr[row + 1][col + 1];
+		hourglass[4] = arr[row + 2][col];
+		hourglass[5] = arr[row + 2][col + 1];
+		hourglass[6] = arr[row + 2][col + 2];
+
+		hourglasses[i] = hourglass;
+		
+		if (col == 3)
+		{
+			row += 1;
+			col = 0;
+		}
+		else
+		{
+			col += 1;
+		}
+
 	}
+
+	int largestSum = -99999;
+	int largestSumIndex = 0;
+	int result;
+	for (int i = 0; i < hourglasses.size(); i++)
+	{
+		result = 0;
+		for (int j = 0; j < hourglasses[i].size(); j++)
+		{
+			result += hourglasses[i][j];
+		}
+		if (result >= largestSum)
+		{
+			largestSum = result;
+			largestSumIndex = i;
+		}
+	}
+	return largestSum;
 }
 
 int main()
 {
-	int arrayOne[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	int arrayTwo[10];
-	MultiplyArray(arrayOne, 10, arrayTwo);
-}
+	vector<vector<int>> arr = {
+		{ -1, -1, 0, -9, -2, -2},
+		{-2, -1, -6, -8, -2, -5},
+		{-1, -1, -1, -2, -3, -4},
+		{-1, -9, -2, -4, -4, -5},
+		{-7, -3, -3, -2, -9, -9},
+		{-1, -3, -1, -2, -4, -5} };
 
+	int result = hourglassSum(arr);
+
+	cout << result << "\n";
+	return 0;
+}

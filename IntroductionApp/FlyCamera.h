@@ -9,7 +9,6 @@ class FlyCamera : public Camera
 {
 private:
 	float m_speed;
-	glm::vec3 up;
 
 public:
 	FlyCamera();
