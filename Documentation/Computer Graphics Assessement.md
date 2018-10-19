@@ -20,13 +20,13 @@ Now, create the Camera class itself. The camera class should resemble the follow
 
 To allow the CameraApplication class to use the Camera class, include the Camera class’s header file in the CameraApplication header file. Add a public Camera in the CameraApplication header and assign it as a new Camera.
 
-```c++
+```C
 Camera * cam = new Camera();
 ```
 
 In the CameraApplication’s startup function I set the camera’s viewTransform member variable by calling setLookAt. Next, I set the camera’s projectionView member variable by calling SetPerspective, which will give the camera a perspective view. 
 
-```c++
+```C
 void CameraApplication::startup()
 {
 	cam->SetLookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
@@ -38,14 +38,14 @@ void CameraApplication::startup()
 
 **Pre-conditions:** There is a function called “SetLookAt”. It should have a return type of glm::mat4 because this function returns a 4x4 matrix. The function takes in three glm::vec3s. The first vec3 is called “from”, and it is the position of the camera. The second vec3 is called “to” and it is the direction to look in. The last vec3 is called “up” and it is a normalized vector that points upwards.
 
-```c++
+```C
 glm::mat4 Camera::SetLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 ```
 
 Within the function, you will need to create a vec3 which we will call “forward”. Assign forward the normalized value of from minus to. Next, create a vec3 called “right”, and assign it the cross product of the up variable normalized and forward. Then create another vec3 called “_up” and assign it the cross product of forward and right.
 
 
-```c++
+```C
 glm::vec3 forward = glm::normalize(from - to);
 glm::vec3 right = glm::cross(glm::normalize(up), forward);
 glm::vec3 _up = glm::cross(forward, right);
@@ -54,7 +54,7 @@ glm::vec3 _up = glm::cross(forward, right);
 Now, we assign every index in the camera’s viewTransform as shown in the following image:
 
 
-```c++
+```C
 viewTransform[0][0] = right.x;
 viewTransform[0][1] = right.y;
 viewTransform[0][2] = right.z;
@@ -80,7 +80,7 @@ To set up a camera with a perspective view, you will need to do calculations in 
 The following picture shows the calculations to build the perspective view matrix:
 
 
-```c++
+```C
 glm::mat4 Camera::SetPerspective(float fieldOfView, float aspectRatio, float near, float far)
 {
     projectionTransform = glm::mat4(1);
@@ -102,7 +102,7 @@ The orthographic projection implementation gives the camera a rectangular, tunne
 To set up a camera with an orthographic view, you will need to do calculations in the correct indices of the camera’s projectionTransform matrix. When finished with the calculations, return the projectionTransform.
 The following picture shows calculations for a way to build the orthographic projection matrix:
 
-```c++
+```C
 glm::mat4 Camera::SetOrthographic(float left, float right, float top, float bottom, float far, float near)
 {
     projectionTransform = glm::mat4(1);
@@ -127,7 +127,7 @@ The fly camera is the camera that will be used to move around the scene. To impl
 The fly-camera has a private member variable called “m_speed”.
 The FlyCamera class should have an Update function and a SetSpeed function, and both are public functions.
 
-```c++
+```C
 class FlyCamera : public Camera
 {
 private:
@@ -144,7 +144,7 @@ public:
 
 The Update function’s return type is void and it takes in two arguments. The first argument is a GLFWwindow pointer for the window. The GLFWwindow type comes from the glfw3.h file. The second argument is a float for delta time. This function is used to move the camera around the scene by checking for user input. By using glfwGetKey and passing in the window being rendered and a keycode as the arguments, we can create conditions to check for in order to move the fly-camera. If a condition is met, we can use the camera’s SetPosition function to translate the camera to a new location. We can also use a transform class or glm::rotate for rotating.
 
-```c++
+```C
 void FlyCamera::Update(GLFWwindow* window, float deltaTime)
 {
 	if (glfwGetKey(window, GLFW_KEY_W))
@@ -186,7 +186,7 @@ void FlyCamera::Update(GLFWwindow* window, float deltaTime)
 
 The SetSpeed function’s return type is also void and it takes in one argument. The argument is a float for the speed the fly-camera will move around the scene. When this function is called, it will simply set m_speed to the value being passed in. 
 
-```c++
+```C
 void FlyCamera::SetSpeed(float speed)
 {
 	m_speed = speed;
@@ -215,7 +215,7 @@ The MeshRenderer class consists of:
 -	A function called initialize with a return type of integer that takes in a vector of type unsigned integer for the indices and a vector of type Vertex for the vertices, which passes them both by reference.
 -	A function called “render” with a return type of integer that is responsible for drawing the elements.
 
-```c++
+```C
 class MeshRenderer
 {
 public:
@@ -251,7 +251,7 @@ private:
 
 The initialize function assigns the first passed in argument to m_indices and the second passed in argument to m_vertices. Then it calls the function to create_buffers to generate and bind the buffers for drawing. Lastly, 1 is returned if the function executed successfully.
 
-```c++
+```C
 int MeshRenderer::initialize(std::vector<unsigned int>& indices, std::vector<Vertex>& vertices)
 {
 	m_indices = indices;
@@ -264,20 +264,20 @@ int MeshRenderer::initialize(std::vector<unsigned int>& indices, std::vector<Ver
 
 The create_buffers function generates and binds the buffers that will be used for rendering. First, generate the vertex array by calling glGenVertexArrays and pass in m_vao. 
 
-```c++
+```C
 	glGenVertexArrays(1, &m_vao);
 ```
 
 Next, generate the buffers by calling glGenBuffers twice, and then passing m_vbo into the first and m_ibo into the second.
 
-```c++
+```C
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ibo);
 ```
 
 Now bind the vertex array object and vertex buffer object. Use the glBufferData function to buffer the data for the vertices. Next, bind the index buffer object, and then buffer the indices data with glBufferData.
 
-```c++
+```C
 glBindVertexArray(m_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
@@ -292,7 +292,7 @@ Next, call glEnableVertexAttribArray again and this time pass in a 1 as the argu
 
 Finally, call glBindVertexArray and pass in 0, call glBindBuffer and pass in GL_ARRAY_BUFFER, and call glBindBuffer and pass in GL_ELEMENT_ARRAY_BUFFER.
 
-```c++
+```C
 //positions
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
@@ -310,7 +310,7 @@ return 1
 
 **Complete code for create_buffers:**
 
-```c++
+```C
 int MeshRenderer::create_buffers()
 {
 	//generate vertex array object
@@ -351,7 +351,7 @@ The render function draws the geometry onto the screen.
 - Set the drawing mode with glDrawElements. For now we will be drawing using triangle strips.              	Pass in the size of the indices vertex to set the amount of elements to draw.
 - Once that’s done, disable GL_PRIMITIVE_RESTART, bind the vertex array to 0, and return 1.
 
-```c++
+```C
 int MeshRenderer::render()
 {
 	glBindVertexArray(m_vao);
@@ -372,13 +372,13 @@ int MeshRenderer::render()
 
 To generate indices for use with rendering geometry using triangle strips, we will create a function and call it genIndices. This function will have a return type that is a vector of type unsigned int. It takes in two integers as arguments. The first for the number of points and the second is for the number of meridians.
 
-```c++
+```C
 std::vector<unsigned int> genIndices(int np, int nm)
 ```
 
 We begin by creating a few variables. You need a vector of type unsigned integer for the indices, a variable of type unsigned integer for the bottom left index, and a variable of type unsigned integer for the bottom right index. Lastly, you’ll need a variable of type integer that we will call “start”. 
 
-```c++
+```C
 std::vector<unsigned int> indices;
 	unsigned int bot_left;
 	unsigned int bot_right;
@@ -389,7 +389,7 @@ Now we can begin creating the indices. We will need to create a nested for loop.
 
 The first for loop will declare a new variable of type int, ‘i’, and initialize it with zero. The condition will be that ‘i’ is less than the number of meridians, which was passed in. The variable ‘i’ will increment by one every iteration of the loop. Before the next for loop runs, we assign our start variable to be ‘i’ multiplied by the number of points.
 
-```c++
+```C
 for (int i = 0; i < nm; i++)
 	{
 		start = i * np;
@@ -397,7 +397,7 @@ for (int i = 0; i < nm; i++)
 
 The second for loop will declare a new variable of type int, ‘j’, and initialize it with zero. The condition will be that j is less than the number of points. ‘j’ will increment by one every iteration of the loop. Within this loop the bottom left variable is assigned start + ‘j’. The bottom right variable is assigned the bottom left variable + number of points. The indices vector will then push back the bottom left variable and then it will push back the bottom right variable. Once the second for loop finishes executing, push back “0XFFFF”.
 
-```c++
+```C
 for (int j = 0; j < np; j++)
 		{
 			bot_left = start + j;
@@ -413,7 +413,7 @@ Once the for loops are finished executing, return the vector of indices.
 
 **Completed Code:**
 
-```c++
+```C
 std::vector<unsigned int> genIndices(int np, int nm)
 {
 	std::vector<unsigned int> indices;
@@ -459,7 +459,7 @@ Create a new vector of type Vertex and call it “vertices”. Initialize this v
 
 Once the vertices are created, call the MeshRenderer class’s initialize function and put the indices and vertices variables as arguments to load in the geometry.
 
-```c++
+```C
 void genPlane()
 {
 	std::vector<unsigned int> indices = { 0, 1, 2, 2, 3, 0 };
@@ -485,7 +485,7 @@ To render a cube with predefined vertex information, create a function called �
 
 A cube is made up of six different planes so, first, I create the vertices. I created a vector of type Vertex and called it vertices. I initialize vertices on declaration. I will need to create fourteen different instances of Vertex. The first four vertices will be the plane’s front face. I will need to create two more vertices for every other side. I only need two vertices for the other sides, because the indices will connect the two vertices to two other vertices that already exist on the plane’s front face to create another side of the plane. 
 
-```c++
+```C
 std::vector<MeshRenderer::Vertex> vertices
 	{
 		//front
@@ -514,7 +514,7 @@ std::vector<MeshRenderer::Vertex> vertices
 
 Once I finish creating the vertices, I then create the indices. Since a cube is different from a sphere and only requires a set number of points, I can manually put the indices in order that they should be connected. To do this I create a vector of unsigned int and then initialize it with the order to connect the points. 
 
-```c++
+```C
 std::vector<unsigned int> indices =
 	{
 
@@ -534,7 +534,7 @@ Calling the MeshRenderer  class’s render function will render the cube.
 
 **Finished Code:** 
 
-```c++
+```C
 void RenderingGeometryApp::genCube()
 {
 	std::vector<MeshRenderer::Vertex> vertices
@@ -583,20 +583,20 @@ void RenderingGeometryApp::genCube()
 
 To generate a half-circle given a number of points and a radius, create a function called “genHalfCircle” and have it take in two integers as arguments. The first integer is for the number of points and the other is for the radius. The functions return type is a vector of type vec4.
 
-```c++
+```C
 std::vector<glm::vec4> genHalfCircle(int np, int radius)
 ```
 
 Within this function, declare a vector of type vec4 variable. This variable, which we will call “points” will store the points generated to create the half circle.
 
-```c++
+```C
 std::vector<glm::vec4> points;
 ```
 Next, create a for-loop. The for-loop initializes a variable of type float and assigns it zero. The condition is that the variable is less than the number of points passed into the function. The variable should increment by one each iteration of the loop.
 
 Within the for-loop, declare a new float called angle, and assign it pi divided by the number of points minus one. Next, create another float called theta and assign it the for-loop’s variable multiplied by angle. Finally, push back a new ve4 onto the points vector. The vec4’s x value will be the cosine of theta multiplied by the radius passed in. The vec4’s y value will be the sine of theta multiplied by the radius. The last two values will be zero and one respectively.
 
-```c++
+```C
 	for (float i = 0; i < np; i++)
 	{
 		float angle = glm::pi<float>() / ((float)np - 1);
@@ -610,7 +610,7 @@ After the for-loop runs, the function will return the points vector.
 
 
 
-```c++
+```C
 std::vector<glm::vec4> genHalfCircle(int np, int radius)
 {
 	std::vector<glm::vec4> points;
@@ -631,13 +631,13 @@ std::vector<glm::vec4> genHalfCircle(int np, int radius)
 
 To generate a sphere when given a half circle and a number of meridians, create a function called “genSphere” with a return type being void. This function will take in three integers. The first integer is for the radius of the sphere. The second integer is for the number of points. The third integer is for the number of meridians.
 
-```c++
+```C
 void genSphere(int radius, int numPoints, int meridians)
 ```
 
 First, declare two vectors of type vec4. One vector will be named “points” and the other vector will be named “totalPoints”. The first variable “points” will be assigned the returned value of the function genHalfCircle. The arguments number of points and meridians arguments being passed into the the genSphere function will be passed into the genHalfCircle function also. 
 
-```c++
+```C
 std::vector<glm::vec4> points = genHalfCircle(numPoints, radius);
 	std::vector<glm::vec4> totalPoints;
 ```
@@ -646,7 +646,7 @@ Next, create a for-loop. This for-loop declares a variable of type float called 
 
 Within this for-loop, declare a variable of type float and call it angle. Assign angle with the result of pi multiplied by two divided by meridians. Now declare a variable of type float called theta. Theta is assigned ‘i’ multiplied by angle.
 
-```c++
+```C
 for (float i = 0; i <= meridians; i++)
 	{
 		float angle = glm::pi<float>() * 2 / meridians;
@@ -657,7 +657,7 @@ After declaring angle and theta, create another for loop within the current for 
 
 This new for-loop is going to create all of the points that will make up the sphere by rotating the points of the half circle. To do this, declare three new variables of type float. The first variable, called ‘x’, will be assigned the x value of points[j].  The second variable, ‘y’, will be assigned the sum of points[j] y value multiplied by cosine theta and points[j] z value multiplied by negative sine theta. Once the point has been rotated, push back a new vec4 initialized with the arguments being the variables x, y, z, and the number 1, onto totalPoints.
 
-```c++
+```C
 for (int j = 0; j < points.size(); j++)
 		{
 			float x = points[j].x;
@@ -674,7 +674,7 @@ Using the passed in number of points and number of meridians arguments call the 
 
 
 
-```c++
+```C
 std::vector<unsigned int> indices = genIndices(numPoints, meridians);
 	std::vector<MeshRenderer::Vertex> vertices;
 
@@ -691,7 +691,7 @@ Finally, return totalPoints.
 
 **Full code:** 
 
-```c++
+```C
 void genSphere(int radius, int numPoints, int meridians)
 {
 	std::vector<glm::vec4> points = genHalfCircle(numPoints, radius);
@@ -729,7 +729,7 @@ void genSphere(int radius, int numPoints, int meridians)
 
 To render a sphere with triangles strips all you have to do is use the glDrawElements function which should be in the MeshRenderer class’s render function. The first argument of glDrawElements should be “GL_TRIANGLE_STRIP”. This will draw using triangles. Now all you need to do is call the genSphere function and the MeshRenderer’s draw function.
 
-```c++
+```C
 	glDrawElements(GL_TRIANGLE_STRIP, m_indices.size(), GL_UNSIGNED_INT, 0);
 ```
 
@@ -742,7 +742,7 @@ To render a sphere with triangles strips all you have to do is use the glDrawEle
 
 To render a sphere with triangles all you have to do is use the glDrawElements function which should be in the MeshRenderer class’s render function. The first argument of glDrawElements should be “GL_TRIANGLES”. This will draw using triangles. Now all you need to do is call the genSphere function and then the MeshRenderer class’s render function.
 
-```c++
+```C
 glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 ```
 
@@ -757,7 +757,7 @@ This is a picture of my shader class. This class contains:
 -	Strings to store all of the text in the vertex and fragment shader file sources
 -	Unsigned integers for the shader program
 
-```c++
+```C
 class Shader
 {
 public:
@@ -786,7 +786,7 @@ public:
 
 Load should be called twice. Once to load the vertex shader, and again to load the fragment shader. If a ‘1’ is passed in as a second argument, then a vertex shader will attempt to be loaded. If a ‘2’ is passed in as the second argument, then a fragment shader will attempt to be loaded. 
 
-```c++
+```C
 shader = new Shader();
 shader->Load("shader.vert", 1);
 shader->Load("shader.frag", 2);
@@ -794,7 +794,7 @@ shader->Load("shader.frag", 2);
 
 When Load is called, the file is read and stored in a variable. The shader class’s “vsrc” and “fsrc” variable store the file’s contents. Depending on the unsigned integer passed in, the shaders vsource or fsource member variables will be assigned the contents of the file.
 
-```c++
+```C
 void Shader::Load(const char* filename, unsigned int type)
 {
 	errno_t err;
@@ -828,7 +828,7 @@ void Shader::Load(const char* filename, unsigned int type)
 
 The Attach function compiles the information stored in the vsource and fsource member variables. A new program is created. This program is the shader program with the vsource and fsource shaders compiled. Once the program is created the shaders are attached to it and the program is linked to the whole application.
 
-```c++
+```C
 void Shader::Attach()
 {
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -904,7 +904,7 @@ The Texture class should resemble this UML:
 
 To load the texture you will use the load function. The load function takes in a const char* for the name or directory of the file. Within the function, check to see if the handle is currently being used. Check to see if it is equal to 0. If the handle is not equal to zero, delete the current texture, set the m_handle, m_width, and the m_height to zero, and set the m_filename to be empty.
 
-```c++
+```C
 	if (m_glHandle != 0)
 	{
 		glDeleteTextures(1, &m_glHandle);
@@ -917,7 +917,7 @@ To load the texture you will use the load function. The load function takes in a
 
 Now, declare three new integer variables called “imageWidth”, “imageHeight”, and “imageFormat”. Initialize the m_loadedPixels member variable with the stbi_load function. Next, call the following functions:
 
-```c++
+```C
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &m_glHandle);
 	glBindTexture(GL_TEXTURE_2D, m_glHandle);
@@ -931,7 +931,7 @@ Once finished loading in the texture, call stbi_image_free to free the loaded te
 
 **Completed Code:** 
 
-```c++
+```C
 bool Texture::load(const char * filename)
 {
 	if (m_glHandle != 0)
