@@ -890,3 +890,71 @@ To add the effects of specular to FragColor, multiply vColor by specular. You ca
 The difference between Blinn-Phong and Phong, are in how specular lighting is calculated. Instead of using a reflection vector like the Phong model, Blinn-Phong uses what is called a half-way vector which is a unit vector that is halfway between the view direction and the light direction.
 
 The way Blinn-Phong is calculated allows it to be faster than the Phong model due to faster computation. 
+
+## **Textures**
+
+### **Loading a texture**
+
+**Pre-condition** The Mesh class must be finished and there must be an object currently being drawn to put a texture on it. You will also need to download the STB libraries and link them to the project.
+
+The Texture class should resemble this UML:
+
+![alt text]( https://brettstelly.files.wordpress.com/2018/10/texture-uml.png
+"Texture UML")
+
+To load the texture you will use the load function. The load function takes in a const char* for the name or directory of the file. Within the function, check to see if the handle is currently being used. Check to see if it is equal to 0. If the handle is not equal to zero, delete the current texture, set the m_handle, m_width, and the m_height to zero, and set the m_filename to be empty.
+
+```c++
+	if (m_glHandle != 0)
+	{
+		glDeleteTextures(1, &m_glHandle);
+		m_glHandle = 0;
+		m_width = 0;
+		m_height = 0;
+		m_filename = "";
+	}
+```
+
+Now, declare three new integer variables called “imageWidth”, “imageHeight”, and “imageFormat”. Initialize the m_loadedPixels member variable with the stbi_load function. Next, call the following functions:
+
+```c++
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1, &m_glHandle);
+	glBindTexture(GL_TEXTURE_2D, m_glHandle);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, m_loadedPixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+```
+
+Once finished loading in the texture, call stbi_image_free to free the loaded texture. When finished return true. 
+
+**Completed Code:** 
+
+```c++
+bool Texture::load(const char * filename)
+{
+	if (m_glHandle != 0)
+	{
+		glDeleteTextures(1, &m_glHandle);
+		m_glHandle = 0;
+		m_width = 0;
+		m_height = 0;
+		m_filename = "";
+	}
+
+
+	int imageWidth, imageHeight, imageFormat;
+	m_loadedPixels = stbi_load(filename, &imageWidth, &imageHeight, &imageFormat, STBI_rgb);
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1, &m_glHandle);
+	glBindTexture(GL_TEXTURE_2D, m_glHandle);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, m_loadedPixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	stbi_image_free(m_loadedPixels);
+	return true;
+}
+```
